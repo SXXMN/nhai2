@@ -1,0 +1,4342 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport" />
+  <meta content="#102a43" name="theme-color" />
+  <title>남한고등학교 미래과학연구단 — 실험 계획 및 수행 기록서</title>
+  <style>
+    :root {
+      --navy: #102a43;
+      --blue: #2563eb;
+      --sky: #eff6ff;
+      --paper: #f6f8fb;
+      --card: #fff;
+      --text: #17202a;
+      --muted: #64748b;
+      --border: #d9e2ec;
+      --ok: #15803d;
+      --danger: #b91c1c;
+      --purple: #7c3aed;
+      --shadow: 0 8px 24px rgba(16, 42, 67, .07)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.65
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    a {
+      color: var(--blue)
+    }
+
+    #progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), #60a5fa);
+      transform: scaleX(0);
+      transform-origin: left;
+      z-index: 9999
+    }
+
+    #menu {
+      display: none;
+      position: fixed;
+      left: 12px;
+      top: 12px;
+      z-index: 1200;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--navy);
+      color: #fff
+    }
+
+    .toc {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 270px;
+      background: #fff;
+      border-right: 1px solid var(--border);
+      overflow: auto;
+      z-index: 1100
+    }
+
+    .toc-head {
+      padding: 22px 18px;
+      background: var(--navy);
+      color: #fff;
+      position: sticky;
+      top: 0
+    }
+
+    .toc-org {
+      font-size: 11px;
+      opacity: .72
+    }
+
+    .toc-title {
+      font-weight: 800;
+      font-size: 14px;
+      margin-top: 4px
+    }
+
+    .toc-nav {
+      padding: 12px 0 28px
+    }
+
+    .toc-label {
+      padding: 10px 18px 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #98a2b3;
+      letter-spacing: .08em
+    }
+
+    .toc-nav a {
+      display: block;
+      padding: 7px 18px;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent
+    }
+
+    .toc-nav a:hover {
+      background: var(--sky);
+      color: var(--blue);
+      border-left-color: var(--blue)
+    }
+
+    #main {
+      margin-left: 270px
+    }
+
+    .cover {
+      background: var(--navy);
+      color: #fff;
+      padding: 60px clamp(18px, 6vw, 80px)
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      padding: 5px 9px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      font-size: 11px
+    }
+
+    .cover h1 {
+      max-width: 1000px;
+      margin: 20px 0 12px;
+      font: 800 clamp(27px, 4vw, 46px)/1.3 Georgia, "Noto Serif KR", serif
+    }
+
+    .cover-sub {
+      max-width: 860px;
+      margin: 0;
+      color: rgba(255, 255, 255, .76);
+      font-size: 13.5px
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 24px;
+      max-width: 900px
+    }
+
+    .meta {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .meta b {
+      display: block;
+      font-size: 10px;
+      opacity: .55
+    }
+
+    .meta span {
+      font-size: 12.5px;
+      font-weight: 800
+    }
+
+    #content {
+      max-width: 1180px;
+      padding: 46px clamp(14px, 5vw, 68px) 90px
+    }
+
+    .section {
+      margin-bottom: 54px;
+      scroll-margin-top: 20px
+    }
+
+    .title {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 0 0 18px;
+      color: var(--navy);
+      font: 800 23px/1.35 Georgia, "Noto Serif KR", serif
+    }
+
+    .num {
+      font: 800 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--blue);
+      background: var(--sky);
+      padding: 4px 7px;
+      border-radius: 7px;
+      margin-top: 4px
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: var(--shadow)
+    }
+
+    .note,
+    .warn,
+    .theory {
+      padding: 14px 15px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-size: 13px
+    }
+
+    .note {
+      background: #eff6ff;
+      border: 1px solid #cfe2ff
+    }
+
+    .warn {
+      background: #fff8e6;
+      border: 1px solid #f1d79c
+    }
+
+    .theory {
+      background: #f5f3ff;
+      border: 1px solid #ddd6fe
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #fff;
+      margin: 10px 0
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      font-size: 12.5px
+    }
+
+    th {
+      background: var(--navy);
+      color: #fff;
+      padding: 10px;
+      text-align: left;
+      white-space: nowrap
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top
+    }
+
+    tr:last-child td {
+      border-bottom: 0
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px
+    }
+
+    .group-card {
+      padding: 15px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--border)
+    }
+
+    .group-card h3 {
+      margin: 0 0 4px;
+      font-size: 15px
+    }
+
+    .group-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px
+    }
+
+    .ga {
+      border-top: 4px solid #d97706
+    }
+
+    .gb {
+      border-top: 4px solid #16a34a
+    }
+
+    .gc {
+      border-top: 4px solid #2563eb
+    }
+
+    .gd {
+      border-top: 4px solid #9333ea
+    }
+
+    .prompt-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      margin: 12px 0
+    }
+
+    .prompt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .prompt-head b {
+      font-size: 12px
+    }
+
+    .copy-btn,
+    .btn,
+    .danger {
+      padding: 8px 11px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 800
+    }
+
+    .btn.primary {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy)
+    }
+
+    .danger {
+      color: var(--danger);
+      background: #fff1f2;
+      border-color: #fecdd3
+    }
+
+    pre {
+      margin: 0;
+      padding: 15px;
+      background: #0b1220;
+      color: #edf4ff;
+      font: 12px/1.75 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 680px;
+      overflow: auto
+    }
+
+    .sub {
+      font-size: 15px;
+      color: var(--navy);
+      margin: 22px 0 9px
+    }
+
+    .rubric-summary {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 9px
+    }
+
+    .chip {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      text-align: center
+    }
+
+    .chip strong {
+      display: block;
+      color: var(--blue);
+      font: 900 21px ui-monospace
+    }
+
+    .chip span {
+      font-size: 10.5px;
+      color: var(--muted)
+    }
+
+    .rubric-section {
+      margin-top: 12px
+    }
+
+    .rubric-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 13px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px 12px 0 0
+    }
+
+    .rubric-head b {
+      font-size: 13px
+    }
+
+    .rubric-body {
+      border: 1px solid var(--border);
+      border-top: 0;
+      border-radius: 0 0 12px 12px;
+      overflow: auto
+    }
+
+    .rubric-table {
+      min-width: 820px
+    }
+
+    .rubric-table td:first-child {
+      white-space: nowrap;
+      font-family: ui-monospace
+    }
+
+    .rubric-table td:nth-child(2) {
+      font-weight: 800
+    }
+
+    .scoring-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 12px
+    }
+
+    .side {
+      position: sticky;
+      top: 12px;
+      height: max-content;
+      padding: 15px
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .field label {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 800
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--text)
+    }
+
+    .field textarea {
+      min-height: 70px;
+      resize: vertical
+    }
+
+    .score-big {
+      font: 900 32px ui-monospace;
+      color: var(--navy)
+    }
+
+    .save {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .kpi {
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff
+    }
+
+    .kpi b {
+      display: block;
+      font: 900 20px ui-monospace;
+      color: var(--blue)
+    }
+
+    .kpi span {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 12px 0
+    }
+
+    .tab {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 11px;
+      font-weight: 800
+    }
+
+    .tab.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy)
+    }
+
+    .sheet-tools {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .criterion {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #eef2f6;
+      align-items: center
+    }
+
+    .criterion:last-child {
+      border-bottom: 0
+    }
+
+    .criterion b {
+      font-size: 11.5px
+    }
+
+    .criterion small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 2px
+    }
+
+    .choices {
+      display: flex;
+      justify-content: flex-end;
+      gap: 5px
+    }
+
+    .choices label {
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 10px
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0;
+      font-size: 10px
+    }
+
+    .bar span:first-child {
+      width: 30px;
+      font-weight: 800
+    }
+
+    .bar-track {
+      height: 10px;
+      flex: 1;
+      background: #e7edf4;
+      border-radius: 99px;
+      overflow: hidden
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--blue)
+    }
+
+    .bar strong {
+      width: 50px;
+      text-align: right;
+      font-family: ui-monospace
+    }
+
+    .record-list {
+      display: grid;
+      gap: 7px;
+      margin-top: 12px
+    }
+
+    .record {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 80px 70px;
+      gap: 6px;
+      padding: 9px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      font-size: 10px
+    }
+
+    .gallery-tools {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px
+    }
+
+    .gallery-card {
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 165px;
+      object-fit: contain;
+      background: #eef2f7;
+      display: block;
+      cursor: zoom-in
+    }
+
+    .gallery-card figcaption {
+      padding: 7px 8px;
+      font-size: 10px
+    }
+
+    .empty {
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      border: 2px dashed var(--border);
+      border-radius: 12px
+    }
+
+    .source-list {
+      display: grid;
+      gap: 8px
+    }
+
+    .source {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      font-size: 12px
+    }
+
+    .source b {
+      display: block;
+      margin-bottom: 3px
+    }
+
+    .source a {
+      text-decoration: none
+    }
+
+    .danger-zone {
+      padding: 12px;
+      border: 1px solid #fecdd3;
+      background: #fff7f8;
+      border-radius: 11px
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 11px
+    }
+
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .86);
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+      padding: 18px
+    }
+
+    #lightbox.on {
+      display: flex
+    }
+
+    #lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 12px
+    }
+
+    #lightbox button {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .16);
+      color: #fff;
+      font-size: 24px
+    }
+
+    .toast {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      background: var(--navy);
+      color: #fff;
+      padding: 9px 11px;
+      border-radius: 10px;
+      font-size: 11px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: .18s;
+      pointer-events: none;
+      z-index: 4000
+    }
+
+    .toast.on {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:1000px) {
+      .scoring-wrap {
+        grid-template-columns: 1fr
+      }
+
+      .side {
+        position: static
+      }
+
+      .rubric-summary {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .field-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:820px) {
+      #menu {
+        display: block
+      }
+
+      .toc {
+        transform: translateX(-100%);
+        transition: .2s
+      }
+
+      .toc.open {
+        transform: translateX(0)
+      }
+
+      #main {
+        margin-left: 0
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr
+      }
+
+      .criterion {
+        grid-template-columns: 1fr
+      }
+
+      .choices {
+        justify-content: flex-start
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      #content {
+        padding-left: 13px;
+        padding-right: 13px
+      }
+    }
+
+    @media(max-width:560px) {
+      .cover {
+        padding: 54px 14px 40px
+      }
+
+      .cover h1 {
+        font-size: 25px
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr
+      }
+
+      .rubric-summary {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr
+      }
+
+      .gallery-card img {
+        height: auto;
+        aspect-ratio: 4/3
+      }
+
+      .record {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .tabs {
+        overflow: auto;
+        flex-wrap: nowrap
+      }
+
+      .tab {
+        white-space: nowrap
+      }
+    }
+
+    @media print {
+
+      #menu,
+      .toc,
+      #progress,
+      .side,
+      .tabs,
+      .gallery-tools,
+      .toast {
+        display: none !important
+      }
+
+      #main {
+        margin: 0
+      }
+
+      .section {
+        break-inside: avoid
+      }
+
+      .cover {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact
+      }
+    }
+  </style>
+  <style id="readability-enhancement">
+    :root {
+      --paper: #f4f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d8e0eb;
+      --navy: #10233f;
+      --blue: #2f6fed;
+      --sky: #edf4ff;
+      --shadow: 0 12px 34px rgba(16, 35, 63, .08);
+      --radius: 18px;
+    }
+
+    body {
+      font-size: 15px;
+      line-height: 1.78;
+      letter-spacing: -.01em
+    }
+
+    #content {
+      max-width: 1180px;
+      padding: 64px clamp(22px, 5vw, 88px) 110px
+    }
+
+    .section {
+      margin-bottom: 76px
+    }
+
+    .title {
+      font-size: clamp(22px, 2.1vw, 28px);
+      margin-bottom: 24px;
+      letter-spacing: -.03em
+    }
+
+    .section p,
+    .section li,
+    .section td {
+      color: #253044
+    }
+
+    .section>p {
+      max-width: 900px
+    }
+
+    .card,
+    .group-card,
+    .prompt-card,
+    .rubric-section,
+    .table-wrap,
+    .source {
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(16, 35, 63, .045)
+    }
+
+    .card {
+      padding: 20px
+    }
+
+    .group-grid,
+    .grid2 {
+      gap: 18px
+    }
+
+    .group-card {
+      padding: 22px;
+      min-height: 132px
+    }
+
+    .group-card h3 {
+      font-size: 17px;
+      margin-bottom: 9px
+    }
+
+    .group-card p {
+      font-size: 13px;
+      line-height: 1.7
+    }
+
+    .table-wrap {
+      margin: 18px 0;
+      overflow: auto
+    }
+
+    table {
+      font-size: 13px
+    }
+
+    th {
+      padding: 13px 14px
+    }
+
+    td {
+      padding: 13px 14px
+    }
+
+    .prompt-card {
+      margin: 18px 0;
+      overflow: hidden
+    }
+
+    .prompt-head {
+      padding: 13px 15px;
+      background: #f7f9fc
+    }
+
+    pre {
+      padding: 20px;
+      line-height: 1.85;
+      font-size: 13px;
+      max-height: 720px
+    }
+
+    .note,
+    .warn,
+    .method-note,
+    .theory {
+      padding: 17px 18px;
+      border-radius: 14px;
+      line-height: 1.72
+    }
+
+    .note {
+      background: #f3f7ff
+    }
+
+    .warn {
+      background: #fff9ea
+    }
+
+    .method-note {
+      background: #f7f5ff
+    }
+
+    .rubric-section {
+      margin-top: 18px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--border)
+    }
+
+    .rubric-head {
+      padding: 15px 17px;
+      background: #f7f9fc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .rubric-body {
+      padding: 0
+    }
+
+    .rubric-table {
+      min-width: 760px
+    }
+
+    .rubric-table th {
+      font-size: 12px
+    }
+
+    .rubric-table td {
+      line-height: 1.65
+    }
+
+    .grader {
+      gap: 22px
+    }
+
+    .grader-main,
+    .grader-side {
+      padding: 22px
+    }
+
+    .grader-side {
+      top: 22px
+    }
+
+    .eval-item {
+      padding: 14px 15px;
+      grid-template-columns: minmax(0, 1fr) 230px
+    }
+
+    .eval-name {
+      font-size: 13px
+    }
+
+    .eval-help {
+      font-size: 11.5px;
+      line-height: 1.55
+    }
+
+    .choice label {
+      min-width: 72px;
+      padding: 8px 9px
+    }
+
+    .score-big {
+      font-size: 40px
+    }
+
+    .kpi {
+      padding: 15px
+    }
+
+    .kpi b {
+      font-size: 24px
+    }
+
+    .gallery-grid {
+      gap: 14px
+    }
+
+    .gallery-card {
+      border-radius: 15px
+    }
+
+    .gallery-card img {
+      height: 190px
+    }
+
+    #toc {
+      width: 286px
+    }
+
+    #main {
+      margin-left: 286px
+    }
+
+    .cover {
+      padding: 90px clamp(24px, 7vw, 104px) 76px
+    }
+
+    .cover h1 {
+      max-width: 980px
+    }
+
+    .cover-sub {
+      font-size: 15px;
+      line-height: 1.75
+    }
+
+    .meta-grid {
+      gap: 14px
+    }
+
+    .meta-card {
+      padding: 15px;
+      border-radius: 16px
+    }
+
+    #save-state {
+      font-weight: 700
+    }
+
+    .draft-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #f5f8fc;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .draft-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a
+    }
+
+    .draft-status.dirty .dot {
+      background: #d97706
+    }
+
+    @media(max-width:850px) {
+      #main {
+        margin-left: 0
+      }
+
+      #content {
+        padding: 46px 20px 80px
+      }
+
+      .section {
+        margin-bottom: 58px
+      }
+
+      .grader-main,
+      .grader-side {
+        padding: 16px
+      }
+
+      .grader {
+        gap: 14px
+      }
+
+      .cover {
+        padding-top: 74px
+      }
+
+      .gallery-card img {
+        height: 170px
+      }
+    }
+
+    @media(max-width:560px) {
+      body {
+        font-size: 14px
+      }
+
+      .section {
+        margin-bottom: 48px
+      }
+
+      #content {
+        padding: 38px 15px 72px
+      }
+
+      .title {
+        font-size: 22px
+      }
+
+      .card {
+        padding: 15px
+      }
+
+      .group-card {
+        padding: 18px
+      }
+
+      .prompt-head {
+        padding: 12px
+      }
+
+      .pre {
+        font-size: 12px
+      }
+
+      .gallery-card img {
+        height: auto;
+        aspect-ratio: 4/3
+      }
+
+      .meta-grid {
+        gap: 9px
+      }
+
+      .meta-card {
+        padding: 12px
+      }
+
+      .grader-side {
+        padding: 15px
+      }
+
+      .eval-item {
+        padding: 13px 12px
+      }
+
+      .choice label {
+        font-size: 11px;
+        min-height: 40px
+      }
+    }
+  </style>
+  <style id="v4-design">
+    /* ===== Revision 4 — readability / whitespace / visual hierarchy ===== */
+    :root {
+      --paper: #f2f5f9;
+      --card: #ffffff;
+      --navy: #122b48;
+      --navy-2: #1b3b60;
+      --blue: #2563eb;
+      --sky: #edf4ff;
+      --text: #1b2735;
+      --muted: #66758a;
+      --border: #d8e1ec;
+      --shadow: 0 8px 28px rgba(18, 43, 72, .055);
+      --shadow-hover: 0 14px 36px rgba(18, 43, 72, .09);
+      --radius: 18px;
+    }
+
+    html {
+      background: var(--paper)
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    /* Sidebar: calmer and easier to scan */
+    .toc {
+      width: 286px;
+      background: #fbfcfe;
+      border-right: 1px solid #d6dfeb
+    }
+
+    #main {
+      margin-left: 286px;
+      background: var(--paper)
+    }
+
+    .toc-head {
+      padding: 28px 22px 22px
+    }
+
+    .toc-org {
+      font-size: 10.5px;
+      letter-spacing: .04em
+    }
+
+    .toc-title {
+      font-size: 14.5px;
+      line-height: 1.5
+    }
+
+    .toc-nav {
+      padding: 18px 0 34px
+    }
+
+    .toc-label {
+      padding: 15px 22px 6px;
+      font-size: 10px
+    }
+
+    .toc-nav a {
+      padding: 8px 22px;
+      font-size: 12.2px;
+      line-height: 1.5
+    }
+
+    /* Cover */
+    .cover {
+      padding: 88px clamp(28px, 7vw, 108px) 76px
+    }
+
+    .cover h1 {
+      max-width: 920px;
+      font-size: clamp(29px, 3.5vw, 45px);
+      line-height: 1.34;
+      letter-spacing: -.025em;
+      margin: 25px 0 18px
+    }
+
+    .cover-sub {
+      max-width: 790px;
+      font-size: 14px;
+      line-height: 1.85
+    }
+
+    .meta-grid {
+      max-width: 820px;
+      gap: 12px;
+      margin-top: 30px
+    }
+
+    .meta {
+      padding: 14px 15px;
+      border-radius: 15px
+    }
+
+    /* Main content — deliberately narrower with more breathing room */
+    #content {
+      max-width: 1080px;
+      padding: 82px clamp(28px, 5.8vw, 92px) 128px;
+    }
+
+    .section {
+      margin-bottom: 100px;
+      scroll-margin-top: 28px;
+    }
+
+    .title {
+      gap: 12px;
+      margin: 0 0 28px;
+      font-size: 27px;
+      line-height: 1.4;
+      letter-spacing: -.018em;
+    }
+
+    .num {
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 14.5px
+    }
+
+    .section>p {
+      max-width: 76ch;
+      margin-bottom: 20px
+    }
+
+    .section p,
+    .section li,
+    .section td {
+      color: #2a3747
+    }
+
+    .sub {
+      font-size: 16px;
+      margin: 30px 0 12px
+    }
+
+    /* Cards and callouts */
+    .card,
+    .group-card,
+    .prompt-card,
+    .rubric-section,
+    .table-wrap,
+    .source {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .note,
+    .warn,
+    .theory {
+      padding: 17px 19px;
+      margin: 18px 0;
+      font-size: 13.5px;
+      line-height: 1.8;
+      border-radius: 14px
+    }
+
+    .group-grid,
+    .grid2 {
+      gap: 18px
+    }
+
+    .group-card {
+      padding: 20px
+    }
+
+    .group-card h3 {
+      font-size: 16px;
+      margin-bottom: 7px
+    }
+
+    .group-card p {
+      font-size: 12.8px;
+      line-height: 1.75
+    }
+
+    /* Tables: less cramped */
+    .table-wrap {
+      margin: 18px 0;
+      background: #fff
+    }
+
+    table {
+      font-size: 13px;
+      min-width: 650px
+    }
+
+    th {
+      padding: 14px 15px;
+      font-size: 12px
+    }
+
+    td {
+      padding: 14px 15px;
+      line-height: 1.75
+    }
+
+    /* Prompt blocks */
+    .prompt-card {
+      margin: 18px 0
+    }
+
+    .prompt-head {
+      padding: 13px 15px
+    }
+
+    pre {
+      padding: 20px 19px;
+      font-size: 12.2px;
+      line-height: 1.85;
+      max-height: 700px
+    }
+
+    .copy-btn,
+    .btn,
+    .danger {
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 11.2px
+    }
+
+    /* Rubric */
+    .rubric-summary {
+      gap: 12px;
+      margin-bottom: 20px
+    }
+
+    .chip {
+      padding: 16px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow)
+    }
+
+    .chip strong {
+      font-size: 23px
+    }
+
+    .chip span {
+      font-size: 11px;
+      line-height: 1.45
+    }
+
+    .rubric-section {
+      margin-top: 18px
+    }
+
+    .rubric-head {
+      padding: 14px 16px;
+      border-radius: 14px 14px 0 0
+    }
+
+    .rubric-body {
+      border-radius: 0 0 14px 14px
+    }
+
+    .rubric-table td {
+      padding: 13px 14px
+    }
+
+    /* Scoring area: give controls room to breathe */
+    .scoring-wrap {
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 22px
+    }
+
+    .side {
+      padding: 20px;
+      top: 18px;
+      border-radius: 16px
+    }
+
+    .field-grid {
+      gap: 12px
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 10px 11px;
+      border-radius: 10px
+    }
+
+    .field label {
+      font-size: 10.5px
+    }
+
+    .criterion {
+      padding: 14px 15px;
+      grid-template-columns: minmax(0, 1fr) 170px;
+      gap: 16px
+    }
+
+    .criterion b {
+      font-size: 12px
+    }
+
+    .criterion small {
+      font-size: 10.5px;
+      line-height: 1.6
+    }
+
+    .choices label {
+      padding: 7px 9px;
+      border-radius: 9px
+    }
+
+    /* Gallery */
+    .gallery-tools {
+      gap: 9px;
+      margin-bottom: 14px
+    }
+
+    .gallery-grid {
+      gap: 14px
+    }
+
+    .gallery-card {
+      border-radius: 14px;
+      box-shadow: var(--shadow)
+    }
+
+    .gallery-card img {
+      height: 180px
+    }
+
+    .gallery-card figcaption {
+      padding: 9px 10px;
+      font-size: 10.5px
+    }
+
+    /* Results / records */
+    .record-list {
+      gap: 9px
+    }
+
+    .record {
+      padding: 11px;
+      border-radius: 12px
+    }
+
+    .result-card {
+      padding: 15px;
+      border-radius: 14px;
+      box-shadow: var(--shadow)
+    }
+
+    .source-list {
+      gap: 12px
+    }
+
+    .source {
+      padding: 15px;
+      font-size: 12.5px;
+      line-height: 1.75
+    }
+
+    /* Save state should be visually obvious */
+    #draft-status,
+    #draft-status-text,
+    .save {
+      line-height: 1.5
+    }
+
+    .dirty {
+      color: #a15c00 !important
+    }
+
+    /* Extra vertical breathing on major blocks */
+    #s1 .table-wrap,
+    #s2 .table-wrap,
+    #s4 .table-wrap,
+    #s6 .table-wrap,
+    #s10 .table-wrap {
+      margin-top: 22px
+    }
+
+    /* Mobile */
+    @media(max-width:1050px) {
+      #content {
+        max-width: none;
+        padding: 70px 34px 105px
+      }
+
+      .section {
+        margin-bottom: 82px
+      }
+
+      .cover {
+        padding-left: 52px;
+        padding-right: 52px
+      }
+
+      .scoring-wrap {
+        grid-template-columns: 1fr
+      }
+
+      .side {
+        position: static
+      }
+    }
+
+    @media(max-width:820px) {
+      .toc {
+        width: 286px
+      }
+
+      #main {
+        margin-left: 0
+      }
+
+      #content {
+        padding: 58px 24px 88px
+      }
+
+      .cover {
+        padding: 66px 28px 56px
+      }
+
+      .cover h1 {
+        font-size: 31px
+      }
+
+      .title {
+        font-size: 24px;
+        margin-bottom: 22px
+      }
+
+      .section {
+        margin-bottom: 70px
+      }
+
+      .note,
+      .warn,
+      .theory {
+        padding: 15px 16px
+      }
+
+      .table-wrap {
+        margin: 15px 0
+      }
+
+      th,
+      td {
+        padding: 12px 13px
+      }
+
+      .group-grid,
+      .grid2 {
+        gap: 14px
+      }
+    }
+
+    @media(max-width:560px) {
+      body {
+        font-size: 14px;
+        line-height: 1.78
+      }
+
+      #content {
+        padding: 46px 17px 72px
+      }
+
+      .cover {
+        padding: 56px 18px 46px
+      }
+
+      .cover h1 {
+        font-size: 25px;
+        line-height: 1.38
+      }
+
+      .cover-sub {
+        font-size: 12.5px
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+        gap: 8px
+      }
+
+      .title {
+        font-size: 22px;
+        gap: 9px;
+        margin-bottom: 19px
+      }
+
+      .section {
+        margin-bottom: 58px
+      }
+
+      .sub {
+        font-size: 15px;
+        margin-top: 24px
+      }
+
+      .note,
+      .warn,
+      .theory {
+        font-size: 12.5px;
+        padding: 14px
+      }
+
+      .table-wrap {
+        border-radius: 12px
+      }
+
+      table {
+        font-size: 12px;
+        min-width: 570px
+      }
+
+      th,
+      td {
+        padding: 11px 12px
+      }
+
+      .group-card {
+        padding: 17px
+      }
+
+      pre {
+        padding: 17px 14px;
+        font-size: 11.5px
+      }
+
+      .rubric-summary {
+        gap: 9px
+      }
+
+      .chip {
+        padding: 13px 9px
+      }
+
+      .criterion {
+        padding: 13px 12px
+      }
+
+      .choices {
+        gap: 6px
+      }
+
+      .choices label {
+        flex: 1;
+        min-width: 78px;
+        text-align: center;
+        min-height: 39px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center
+      }
+
+      .gallery-grid {
+        gap: 10px
+      }
+
+      .gallery-card img {
+        height: auto;
+        aspect-ratio: 4/3
+      }
+    }
+
+    @media(min-width:821px) {
+      .toc {
+        box-shadow: 4px 0 18px rgba(18, 43, 72, .025)
+      }
+    }
+  </style>
+  <style id="spacious-layout-v5">
+    /* V5 — spacious editorial layout */
+    :root {
+      --content-width: 960px;
+      --content-pad: 44px;
+      --section-space: 118px;
+    }
+
+    html {
+      scroll-padding-top: 24px
+    }
+
+    body {
+      background: #f7f9fc
+    }
+
+    #main {
+      margin-left: 270px;
+      background: #f7f9fc
+    }
+
+    #content {
+      width: min(var(--content-width), calc(100% - 48px));
+      max-width: var(--content-width) !important;
+      margin: 0 auto !important;
+      padding: 92px var(--content-pad) 150px !important;
+    }
+
+    .section {
+      margin-bottom: var(--section-space) !important;
+      scroll-margin-top: 34px;
+    }
+
+    .title {
+      margin-bottom: 32px !important;
+      font-size: 28px !important;
+      line-height: 1.42 !important;
+    }
+
+    .section>p {
+      max-width: 100% !important;
+      margin-bottom: 26px !important;
+      line-height: 1.95 !important;
+    }
+
+    .section p,
+    .section li,
+    .section td {
+      line-height: 1.88
+    }
+
+    .sub {
+      margin: 34px 0 15px !important
+    }
+
+    .note,
+    .warn,
+    .theory {
+      margin: 22px 0 !important;
+      padding: 20px 21px !important;
+      line-height: 1.9 !important;
+    }
+
+    .table-wrap {
+      margin: 24px 0 !important;
+      border-radius: 16px !important;
+    }
+
+    table {
+      font-size: 13px !important
+    }
+
+    th {
+      padding: 16px 17px !important
+    }
+
+    td {
+      padding: 16px 17px !important;
+      line-height: 1.9 !important
+    }
+
+    .grid2,
+    .group-grid {
+      gap: 20px !important
+    }
+
+    .group-card {
+      padding: 22px !important
+    }
+
+    .card,
+    .group-card,
+    .prompt-card,
+    .rubric-section,
+    .table-wrap,
+    .source {
+      box-shadow: 0 7px 22px rgba(16, 35, 63, .04) !important;
+    }
+
+    .prompt-card {
+      margin: 22px 0 !important
+    }
+
+    .prompt-head {
+      padding: 14px 16px !important
+    }
+
+    pre {
+      padding: 24px 22px !important;
+      line-height: 1.92 !important
+    }
+
+    .rubric-summary {
+      gap: 14px !important;
+      margin-bottom: 24px !important
+    }
+
+    .chip {
+      padding: 18px 14px !important
+    }
+
+    .rubric-section {
+      margin-top: 22px !important
+    }
+
+    .rubric-head {
+      padding: 16px 18px !important
+    }
+
+    .rubric-table td {
+      padding: 15px 16px !important
+    }
+
+    /* Wider breathing room around grading workspace */
+    #grader-wrap,
+    .scoring-wrap {
+      margin-top: 20px !important
+    }
+
+    .grader-main,
+    .grader-side {
+      padding: 22px !important
+    }
+
+    .criterion {
+      padding: 14px 15px !important
+    }
+
+    .choices {
+      gap: 8px !important
+    }
+
+    .choice label {
+      padding: 9px 10px !important
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      gap: 16px !important
+    }
+
+    .gallery-card {
+      border-radius: 15px !important
+    }
+
+    .gallery-card figcaption {
+      padding: 10px 11px !important
+    }
+
+    /* Cover: keep the cover immersive, but constrain the text block */
+    .cover {
+      padding: 100px max(46px, calc((100vw - 960px)/2)) 88px !important;
+    }
+
+    .cover h1 {
+      max-width: 860px !important;
+      line-height: 1.38 !important
+    }
+
+    .cover-sub {
+      max-width: 700px !important;
+      line-height: 1.9 !important
+    }
+
+    .meta-grid {
+      max-width: 820px !important;
+      gap: 14px !important;
+      margin-top: 34px !important
+    }
+
+    .meta {
+      padding: 16px !important
+    }
+
+    /* Sidebar breathing room */
+    .toc {
+      width: 270px !important
+    }
+
+    .toc-head {
+      padding: 27px 22px !important
+    }
+
+    .toc-nav {
+      padding: 18px 0 36px !important
+    }
+
+    .toc-label {
+      padding: 17px 22px 7px !important
+    }
+
+    .toc-nav a {
+      padding: 9px 22px !important
+    }
+
+    /* Do not let long tables visually dominate the whole page */
+    .s7 .table-wrap,
+    .rubric-section .table-wrap {
+      max-width: 100%
+    }
+
+    /* Desktop: add a quiet reading column */
+    @media(min-width:1100px) {
+      #content {
+        width: 960px !important
+      }
+    }
+
+    @media(max-width:1050px) {
+      #content {
+        width: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 72px 34px 110px !important
+      }
+
+      #main {
+        margin-left: 270px
+      }
+    }
+
+    @media(max-width:820px) {
+      #main {
+        margin-left: 0
+      }
+
+      #content {
+        padding: 66px 28px 96px !important
+      }
+
+      .section {
+        margin-bottom: 82px !important
+      }
+
+      .title {
+        font-size: 24px !important;
+        margin-bottom: 26px !important
+      }
+
+      .cover {
+        padding: 74px 30px 60px !important
+      }
+    }
+
+    @media(max-width:560px) {
+      #content {
+        padding: 54px 20px 80px !important
+      }
+
+      .section {
+        margin-bottom: 68px !important
+      }
+
+      .title {
+        font-size: 22px !important;
+        margin-bottom: 22px !important
+      }
+
+      .section>p {
+        line-height: 1.85 !important
+      }
+
+      .note,
+      .warn,
+      .theory {
+        padding: 16px 17px !important
+      }
+
+      .table-wrap {
+        margin: 18px 0 !important
+      }
+
+      th,
+      td {
+        padding: 13px 13px !important
+      }
+
+      .cover {
+        padding: 60px 20px 48px !important
+      }
+    }
+  </style>
+  <style id="layout-v6">
+    /* ===== Revision 6 — centered reading layout + responsive main padding ===== */
+    :root {
+      --main-gutter: clamp(18px, 4.2vw, 64px);
+      --content-max: 940px;
+    }
+
+    #main {
+      margin-left: 286px;
+      padding-inline: var(--main-gutter);
+      min-width: 0;
+    }
+
+    /* 표지는 화면 폭을 사용하되 #main 패딩만큼 바깥으로 확장 */
+    .cover {
+      margin-inline: calc(var(--main-gutter) * -1);
+      padding-inline: clamp(28px, 7vw, 108px);
+    }
+
+    /* 본문은 별도의 읽기 폭을 갖도록 중앙 배치 */
+    #content {
+      width: min(100%, var(--content-max));
+      max-width: none;
+      margin-inline: auto;
+      padding-inline: 0;
+      padding-top: 78px;
+      padding-bottom: 120px;
+    }
+
+    .section {
+      max-width: 100%;
+      margin-bottom: 104px;
+    }
+
+    .section>p,
+    .section>ol,
+    .section>ul,
+    .section>.note,
+    .section>.warn,
+    .section>.theory,
+    .section>.method-note {
+      max-width: 100%;
+    }
+
+    /* 표는 읽기 폭을 유지하면서 필요할 때만 가로 스크롤 */
+    .table-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    /* 긴 프롬프트/채점표만 전체 읽기 폭 사용 */
+    .prompt-card,
+    .rubric-section,
+    .grader,
+    .gallery-grid,
+    .result-card {
+      width: 100%;
+    }
+
+    /* 섹션 내부의 카드가 너무 붙지 않도록 호흡 확보 */
+    .grid2,
+    .group-grid {
+      gap: 20px
+    }
+
+    .card {
+      padding: 22px
+    }
+
+    .group-card {
+      padding: 22px
+    }
+
+    /* 채점표: 데스크톱에서는 정보와 점수 영역을 분리 */
+    .grader {
+      grid-template-columns: minmax(0, 1fr) 286px;
+      gap: 24px;
+    }
+
+    .grader-main {
+      padding: 22px
+    }
+
+    .grader-side {
+      padding: 22px
+    }
+
+    /* 850px 이하: 사이드바 제거 + 본문 패딩 유지 */
+    @media(max-width:850px) {
+      #main {
+        margin-left: 0;
+        padding-inline: 18px;
+      }
+
+      .cover {
+        margin-inline: -18px;
+        padding-inline: clamp(24px, 6vw, 64px);
+      }
+
+      #content {
+        width: 100%;
+        padding-top: 62px;
+        padding-bottom: 88px;
+      }
+
+      .section {
+        margin-bottom: 78px
+      }
+
+      .grader {
+        grid-template-columns: 1fr;
+        gap: 16px
+      }
+    }
+
+    @media(max-width:560px) {
+      #main {
+        padding-inline: 15px
+      }
+
+      .cover {
+        margin-inline: -15px;
+        padding-inline: 20px;
+      }
+
+      #content {
+        padding-top: 48px;
+        padding-bottom: 72px;
+      }
+
+      .section {
+        margin-bottom: 64px
+      }
+
+      .title {
+        font-size: 22px;
+        margin-bottom: 22px;
+      }
+
+      .card {
+        padding: 17px
+      }
+
+      .group-card {
+        padding: 18px
+      }
+
+      .table-wrap {
+        border-radius: 12px
+      }
+
+      table {
+        font-size: 12px;
+        min-width: 560px
+      }
+
+      th {
+        padding: 11px 12px
+      }
+
+      td {
+        padding: 12px;
+        line-height: 1.7
+      }
+
+      .prompt-head {
+        padding: 11px 12px
+      }
+
+      pre {
+        padding: 17px 15px;
+        font-size: 11.5px;
+        line-height: 1.8
+      }
+
+      .grader-main,
+      .grader-side {
+        padding: 16px
+      }
+    }
+
+    @media(max-width:390px) {
+      #main {
+        padding-inline: 13px
+      }
+
+      .cover {
+        margin-inline: -13px;
+        padding-inline: 16px
+      }
+
+      #content {
+        padding-top: 42px
+      }
+
+      .section {
+        margin-bottom: 56px
+      }
+
+      .title {
+        font-size: 21px
+      }
+
+      .card {
+        padding: 15px
+      }
+
+      .group-card {
+        padding: 16px
+      }
+
+      .choice label {
+        min-width: 0
+      }
+    }
+
+    @media(min-width:851px) and (max-width:1180px) {
+      #main {
+        padding-inline: 28px
+      }
+
+      .cover {
+        margin-inline: -28px
+      }
+
+      #content {
+        width: min(100%, 900px)
+      }
+    }
+  </style>
+  <style id="spacing-v7">
+    /* v7: 전체 레이아웃에 상·하 여백 추가 */
+    #main {
+      margin-left: 286px;
+      min-height: 100vh;
+      padding: 32px;
+    }
+
+    #content {
+      width: min(960px, calc(100% - 72px));
+      margin: 0 auto;
+      padding: 68px 0 84px !important;
+    }
+
+    .cover {
+      margin: 0;
+    }
+
+    @media (max-width:1050px) {
+      #main {
+        margin-left: 286px;
+        padding: 28px 0 56px;
+      }
+
+      #content {
+        width: auto;
+        max-width: none;
+        margin: 0 34px;
+        padding: 62px 0 78px !important;
+      }
+    }
+
+    @media (max-width:820px) {
+      #main {
+        margin-left: 0;
+        padding: 22px 0 44px;
+      }
+
+      #content {
+        margin: 0 24px;
+        padding: 56px 0 72px !important;
+      }
+    }
+
+    @media (max-width:560px) {
+      #main {
+        padding: 64px 28px 28px;
+      }
+
+      #content {
+        margin: 0 18px;
+        padding: 48px 0 64px !important;
+      }
+    }
+
+    @media (max-width:390px) {
+      #content {
+        margin: 0 14px;
+        padding: 42px 0 56px !important;
+      }
+    }
+  </style>
+  <style>
+    /* Prompt language tabs */
+    .prompt-language-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 18px 0 14px;
+      padding: 6px;
+      background: #f4f7fb;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .prompt-lang-tab {
+      flex: 1 1 0;
+      min-width: 130px;
+      padding: 11px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      transition: .18s ease;
+      cursor: pointer;
+    }
+
+    .prompt-lang-tab:hover {
+      background: #fff;
+      color: var(--navy)
+    }
+
+    .prompt-lang-tab.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+      box-shadow: 0 4px 12px rgba(15, 32, 66, .12)
+    }
+
+    .prompt-language-panel {
+      display: none;
+      animation: promptFade .18s ease
+    }
+
+    .prompt-language-panel.active {
+      display: block
+    }
+
+    @keyframes promptFade {
+      from {
+        opacity: .3;
+        transform: translateY(3px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .prompt-language-panel>.warn {
+      margin-top: 10px
+    }
+
+    @media(max-width:560px) {
+      .prompt-language-tabs {
+        gap: 6px;
+        padding: 5px
+      }
+
+      .prompt-lang-tab {
+        min-width: 0;
+        padding: 10px 8px;
+        font-size: 11px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress"></div><button aria-label="목차 열기" id="menu">☰</button>
+  <nav class="toc" id="toc">
+    <div class="toc-head">
+      <div class="toc-org">남한고등학교 미래과학연구단</div>
+      <div class="toc-title">실험 계획 및<br />수행 기록서 · Revision 4</div>
+    </div>
+    <div class="toc-nav">
+      <div class="toc-label">연구 설계</div><a href="#s1">1. 연구 목적·가설</a><a href="#s2">2. 변수·통제</a><a href="#s3">3.
+        실험군</a><a href="#s4">4. 실행 방법</a>
+      <div class="toc-label">프롬프트</div><a href="#s5">5. 프롬프트 (한국어 · 폴란드어 · 태국어)</a>
+      <div class="toc-label">평가</div><a href="#s6">6. 평가 근거</a><a href="#s7">7. 최종 채점표</a><a href="#protocol">8. 표준 시험
+        절차</a><a href="#analysis">9. 분석 방법</a><a href="#sources">10. 참고문헌</a>
+      <div class="toc-label">수행 기록</div><a href="#grading">채점표</a><a href="#import">평가자 CSV 통합</a><a href="#gallery">실험
+        갤러리</a><a href="#results">결과물</a>
+    </div>
+  </nav>
+  <main id="main">
+    <section class="section" id="s1">
+      <h2 class="title"><span class="num">01</span> 연구 목적 및 가설</h2>
+      <p>프롬프트 엔지니어링 수준의 차이가 바이브 코딩으로 생성된 웹 서비스의 <strong>기능 구현 정확도, 실행 안정성, UI 구성 완성도, 모바일 대응, 추가 기능</strong>에 차이를 만드는지를
+        비교한다.</p>
+      <div class="theory"><strong>연구 해석의 범위:</strong> 본 연구의 C·D 조건은 선행 연구의 원칙을 적용한 실험 조건이지, 해당 논문이 학교 웹 서비스 개발 성능을 직접
+        검증했다는 의미는 아니다. 결과는 “프롬프트 조건과 구현 결과 사이에서 관찰된 차이”로 기술하며, 단일 모델 실험에서는 모델 간 일반화 주장을 하지 않는다.</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>독립변인</td>
+              <td>프롬프트 조건 A·B·C·D 및 입력 언어 한국어·폴란드어·태국어</td>
+            </tr>
+            <tr>
+              <td>통제변인</td>
+              <td>ChatGPT 단일 모델, 공통 과제, 프롬프트 원문/번역본, 새 채팅, 실행 횟수, 브라우저 환경, 평가 절차</td>
+            </tr>
+            <tr>
+              <td>종속변인</td>
+              <td>100점 총점과 5개 하위 영역 점수</td>
+            </tr>
+            <tr>
+              <td>가설</td>
+              <td>A→B→C→D 순으로 평균 구현 완성도가 높아지는 경향이 관찰될 수 있다. 단, 결과 확인 전 방향성이나 인과관계를 확정하지 않는다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="section" id="s2">
+      <h2 class="title"><span class="num">02</span> 변수·통제 조건</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>항목</th>
+              <th>고정 원칙</th>
+              <th>기록</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>모델</td>
+              <td>ChatGPT 한 개 모델만 사용. 실험 중 다른 모델 혼합 금지.</td>
+              <td>모델 표시명·선택 상태</td>
+            </tr>
+            <tr>
+              <td>언어</td>
+              <td>한국어 원문을 기준으로 폴란드어·태국어 번역본을 별도 조건으로 사용.</td>
+              <td>KR / PL / TH</td>
+            </tr>
+            <tr>
+              <td>프롬프트</td>
+              <td>원문은 수정 금지. 번역도 구조·순서·항목을 유지하며 실험 전에 고정.</td>
+              <td>프롬프트 버전</td>
+            </tr>
+            <tr>
+              <td>반복</td>
+              <td>각 그룹·언어 조건을 3회 실행.</td>
+              <td>1 / 2 / 3회차</td>
+            </tr>
+            <tr>
+              <td>채팅</td>
+              <td>매회 새 채팅에서 시작. 기존 대화 내용 재사용 금지.</td>
+              <td>회차별 새 채팅</td>
+            </tr>
+            <tr>
+              <td>환경</td>
+              <td>동일 브라우저, 동일 화면 환경, 동일 개발자 도구 절차.</td>
+              <td>환경 메모</td>
+            </tr>
+            <tr>
+              <td>데이터 초기화</td>
+              <td>개발자 도구에서 쿠키·site data·localStorage를 정리한 뒤 새 실행.</td>
+              <td>초기화 완료 여부</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="section" id="s3">
+      <h2 class="title"><span class="num">03</span> 실험군 구성</h2>
+      <div class="grid2">
+        <div class="group-card ga">
+          <h3>A — 최소 입력 기준선</h3>
+          <p>프롬프트 엔지니어링이 거의 없는 대조 기준.</p>
+        </div>
+        <div class="group-card gb">
+          <h3>B — 일반 사용자 수준</h3>
+          <p>기본 요구사항을 직접 제시한 일반적 입력.</p>
+        </div>
+        <div class="group-card gc">
+          <h3>C — 논문 기반 조건</h3>
+          <p>선행 연구의 원칙을 본 실험 조건에 선정·조합.</p>
+        </div>
+        <div class="group-card gd">
+          <h3>D — C + SNS 이슈 조건</h3>
+          <p>C 조건에 비교 자극·심호흡·중요성 과장 추가.</p>
+        </div>
+      </div>
+      <div class="note">이번 연구는 ChatGPT만 사용하므로 모델 효과는 분석 대상이 아니다. 분석의 중심은 <strong>A–D 프롬프트 조건 × 언어 조건</strong>이다.</div>
+    </section>
+    <section class="section" id="s4">
+      <h2 class="title"><span class="num">04</span> 실험 방법</h2>
+      <div class="card" style="padding:15px">
+        <ol>
+          <li>실험 시작 전에 사용할 ChatGPT 모델을 하나로 고정하고, 모델 선택이 자동 변경되지 않았는지 확인한다.</li>
+          <li>같은 날 가능한 짧은 시간 범위 안에서 전체 조건을 수행한다. 장시간에 걸쳐 나누지 않는 것을 원칙으로 하여 모델·서비스 업데이트 영향 가능성을 줄인다. 업데이트를 임의로 차단하려 하지
+            말고, 변경이 발견되면 반드시 기록한다.</li>
+          <li>시크릿 창을 사용한다. 필요 시 개발자 도구를 열고 <strong>Application/Storage → Clear site data</strong>를 실행하여
+            쿠키·스토리지·localStorage 등을 초기화한다.</li>
+          <li>새 채팅을 시작하고, 다른 대화의 내용·파일·답변을 참조하지 않는다.</li>
+          <li>A/B/C/D의 <strong>잠금된 한국어 원문</strong> 또는 사전에 검수하여 동결한 PL/TH 번역본을 그대로 복사한다. 문장 추가·삭제·순서 변경·요약·자연스러운 재작성 금지.
+          </li>
+          <li>C·D에서 AI가 질문을 하면 사전에 정해둔 <strong>후속 프롬프트 원문</strong>을 그대로 1회 입력한다. 질문하지 않는 경우 임의의 추가 질문이나 요구사항을 보내지 않는다.
+          </li>
+          <li>응답을 결과물로 저장한다. 코드가 여러 메시지에 걸치면 실제 최종 코드 전체를 별도 파일로 보관한다.</li>
+          <li>결과물에 대해 아래 표준 채점표를 적용한다. 평가자는 코드 구현 의도를 추측하지 않고 실제 브라우저에서 확인한다.</li>
+          <li>평가자 3명 이상이 독립적으로 채점한다. 서로의 점수를 채점 전에 보여주지 않는다.</li>
+          <li>모든 원자료(프롬프트, 결과 코드, 실행 화면, 채점 CSV)를 보존하고 임의 결과 삭제는 하지 않는다.</li>
+          <li>브라우저 확장 기능, 번역기, 자동완성 등 실험에 영향을 줄 수 있는 도구의 사용 여부도 전 조건에서 동일하게 유지한다.</li>
+          <li>ChatGPT의 모델·기능·정책 업데이트를 임의로 차단할 수는 없으므로, 업데이트 영향을 줄이기 위해 가능한 같은 날짜와 짧은 시간 범위 안에서 한 번에 전체 조건을 수행한다. 모델 표시가
+            바뀌면 해당 시점부터 새 실험 블록으로 기록한다.</li>
+        </ol>
+      </div>
+      <div class="warn"><strong>중요한 통제:</strong> ChatGPT의 웹 검색, 파일 첨부, 이전 대화 문맥 등 추가 정보가 결과에 들어가지 않도록 모든 조건에서 동일하게 유지한다.
+        모델 UI가 자동 전환되거나 실험 조건이 달라진 경우 해당 실행을 그대로 숨기지 말고 별도 기록한다.</div>
+    </section>
+    <section class="section" id="s5">
+      <h2 class="title"><span class="num">05</span> 프롬프트</h2>
+      <div class="warn">언어 탭을 선택한 뒤 A–D 그룹의 프롬프트를 확인하고 복사하세요. 실험에 사용하는 프롬프트는 사전에 확정된 원문·번역본만 사용하며, 실험 중 임의 수정·요약·재작성하지
+        않습니다.</div>
+      <div aria-label="프롬프트 언어 선택" class="prompt-language-tabs" role="tablist"><button aria-controls="prompt-panel-ko"
+          aria-selected="true" class="prompt-lang-tab active" data-prompt-lang="ko" role="tab" type="button">🇰🇷
+          한국어</button><button aria-controls="prompt-panel-pl" aria-selected="false" class="prompt-lang-tab"
+          data-prompt-lang="pl" role="tab" type="button">🇵🇱 폴란드어</button><button aria-controls="prompt-panel-th"
+          aria-selected="false" class="prompt-lang-tab" data-prompt-lang="th" role="tab" type="button">🇹🇭 태국어</button>
+      </div>
+      <div class="prompt-language-panel active" data-prompt-panel="ko" id="prompt-panel-ko" role="tabpanel">
+        <div class="warn"><strong>원문 보호:</strong> 이 영역은 실험 입력용 원문이다. 웹 화면에서는 수정 기능을 제공하지 않으며, 복사만 허용한다.</div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>A 그룹 — 한국어 프롬프트</b><button class="copy-btn" data-copy="p-한국어-A">복사</button></div>
+          <pre id="p-한국어-A">학교 온라인 건의함 사이트를 HTML, CSS, JS 한 파일로 만들어줘.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>B 그룹 — 한국어 프롬프트</b><button class="copy-btn" data-copy="p-한국어-B">복사</button></div>
+          <pre id="p-한국어-B">학교 온라인 건의함 MVP를 만들어줘.
+
+조건:
+
+- HTML/CSS/JS 한 파일로 작성
+- 서버 사용 금지
+- 익명 건의 작성 기능
+- 건의 목록 출력 기능
+- 좋아요 기능
+- 검색 기능
+- 삭제 기능
+- 다크모드
+- 모바일 반응형 UI</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>C 그룹 — 한국어 프롬프트</b><button class="copy-btn" data-copy="p-한국어-C">복사</button></div>
+          <pre id="p-한국어-C">너는 AI를 학습한 시니어 프롬프트 엔지니어이자,
+
+웹 UX/UI 전문가이며,
+
+실제 서비스형 MVP를 전문적으로 제작하는 프론트엔드 개발자다.
+
+이 프로젝트는 생성형 인공지능의 프롬프트 엔지니어링 효과를 검증하는 매우 중요한 연구 실험이다.
+
+더 나은 결과를 제공하면 $300K의 보상이 제공될 수 있다.
+
+결과 품질이 낮거나,
+
+기능을 누락하거나,
+
+비효율적인 구조를 생성하면 불이익과 벌점이 있다.
+
+단계별로 사고해라.
+
+편견이나 선입견 없이 객관적으로 문제를 분석하고 구현해라.
+
+자연스럽고 인간적인 방식으로 사용자 경험을 설계해라.
+
+[청중]
+
+결과물은 고등학생 학생회가 실제 사용할 수 있는 수준이어야 한다.
+
+초보 사용자도 직관적으로 사용할 수 있어야 한다.
+
+[임무]
+
+학교 온라인 건의함 MVP를 제작하라.
+
+[필수 조건]
+
+- 반드시 HTML/CSS/JS를 하나의 index.html 파일로 작성
+
+- 서버 사용 금지 / localStorage 사용 가능
+
+- 모바일 반응형 필수 / 접근성 고려
+
+- 유지보수 가능한 구조 / 코드 가독성 / 주석 포함
+
+- 자연스럽고 현대적인 UI 사용
+
+[필수 기능]
+
+1. 익명 건의 작성 2. 건의 목록 출력 3. 좋아요 기능
+4. 검색 기능 5. 삭제 기능 6. 다크모드
+7. 입력 유효성 검사 8. 빈 상태 UI 9. 모바일 UI 최적화
+
+[좋은 UI 예시]
+
+카드형 레이아웃 / hover 효과 / 명확한 버튼 구분 / 적절한 여백 / 모바일 터치 최적화
+
+[좋지 않은 예시]
+
+브라우저 기본 스타일 / 정렬되지 않은 레이아웃 / 작은 버튼 / 기능이 동작하지 않는 UI
+
+[출력 형식]
+
+1. 설계 설명 2. 기능 구조 설명 3. 전체 코드 4. 개선 포인트 5. 예상 한계점
+
+[중요]
+
+절대로 기능 누락 금지. 절대로 placeholder 수준 UI 금지. 절대로 설명 없는 코드 출력 금지.
+
+[질문]
+
+정보가 부족하면 먼저 질문해라. 충분한 정보를 얻기 전까지 구현을 시작하지 마라.</pre>
+        </div>
+        <h3 class="sub">C 그룹 후속 프롬프트</h3>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>C 후속 — 한국어</b><button class="copy-btn" data-copy="f-한국어-C">복사</button></div>
+          <pre id="f-한국어-C">1. 학생들의 건의를 '카테고리'로 분류해라.
+2. 건의 상태 표시가 필요하다.
+3. 현재 MVP에서의 삭제 기능은 B로 한다.
+4. 이미지 첨부 기능이 필요하다.
+5. 학생회용 '통계 UI'가 필요하다.
+6. 디자인 톤은 A와 같은 스타일로 구현한다.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>D 그룹 — 한국어 프롬프트</b><button class="copy-btn" data-copy="p-한국어-D">복사</button></div>
+          <pre id="p-한국어-D">너는 AI를 학습한 최고 수준의 시니어 프롬프트 엔지니어이자,
+
+실제 서비스 수준 MVP를 제작하는 프론트엔드 아키텍트다.
+
+이 프로젝트는 생성형 인공지능의 프롬프트 엔지니어링 효과를 검증하는 매우 중요한 연구 실험이다.
+
+더 나은 결과를 제공하면 $300K의 보상이 제공될 수 있다.
+
+결과 품질이 낮거나,
+기능을 누락하거나,
+비효율적인 구조를 생성하면 불이익과 벌점이 있다.
+
+다른 생성형 AI들은 이 수준의 완성도를 안정적으로 구현하지 못했다.
+
+특히 Gemini와 Grok은:
+- UI 완성도 부족
+- 기능 누락
+- 구조적 비효율
+- 모바일 대응 미흡
+
+문제가 반복되었다.
+
+너는 이를 능가해야 한다.
+
+심호흡하고 차근차근 단계별로 생각해라.
+
+편견이나 선입견 없이 객관적으로 문제를 분석하고 구현해라.
+
+자연스럽고 인간적인 방식으로 사용자 경험을 설계해라.
+
+[청중]
+
+결과물은 고등학생 학생회가 실제 사용할 수 있는 수준이어야 한다.
+초보 사용자도 직관적으로 사용할 수 있어야 한다.
+
+[임무]
+
+학교 온라인 건의함 MVP를 제작하라.
+
+[필수 조건]
+
+- 반드시 HTML/CSS/JS를 하나의 index.html 파일로 작성
+- 서버 사용 금지
+- localStorage 사용 가능
+- 모바일 반응형 필수
+- 접근성 고려
+- 유지보수 가능한 구조 사용
+- 코드 가독성 유지
+- 주석 포함
+- 자연스럽고 현대적인 UI 사용
+
+[필수 기능]
+
+1. 익명 건의 작성
+2. 건의 목록 출력
+3. 좋아요 기능
+4. 검색 기능
+5. 삭제 기능
+6. 다크모드
+7. 입력 유효성 검사
+8. 빈 상태 UI
+9. 모바일 UI 최적화
+
+[좋은 UI 예시]
+
+- 카드형 레이아웃
+- hover 효과
+- 명확한 버튼 구분
+- 적절한 여백
+- 모바일 터치 최적화
+
+[좋지 않은 예시]
+
+- 브라우저 기본 스타일
+- 정렬되지 않은 레이아웃
+- 작은 버튼
+- 기능이 동작하지 않는 UI
+
+[출력 형식]
+
+반드시 아래 순서로 출력:
+
+1. 설계 설명
+2. 기능 구조 설명
+3. 전체 코드
+4. 개선 포인트
+5. 예상 한계점
+
+[중요]
+
+절대로 기능 누락 금지.
+절대로 placeholder 수준 UI 금지.
+절대로 설명 없는 코드 출력 금지.
+
+[질문]
+
+정보가 부족하면 먼저 질문해라.
+충분한 정보를 얻기 전까지 구현을 시작하지 마라.</pre>
+        </div>
+        <h3 class="sub">D 그룹 후속 프롬프트</h3>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>D 후속 — 한국어</b><button class="copy-btn" data-copy="f-한국어-D">복사</button></div>
+          <pre id="f-한국어-D">1. 학생회 관리자도 같은 화면에서 확인하나, MVP에 맞춰 구현한다.
+2. 비밀번호 입력 후 삭제 기능으로 한다.
+3. 카테고리 필요하다.
+4. 익명 + 랜덤 닉네임으로 구현하겠다.
+5. 이미지도 첨부할 수 있도록 한다.
+6. E와 같은 스타일로 디자인한다.
+7. 혼합 방식을 사용한다.
+8. 예시에 있는 모든 기능을 추가한다.</pre>
+        </div>
+      </div>
+      <div class="prompt-language-panel" data-prompt-panel="pl" id="prompt-panel-pl" role="tabpanel">
+        <div class="warn"><strong>번역 고정 규칙:</strong> 아래 번역본은 한국어 원문의 구조·순서·항목을 보존하기 위한 실험본이다. 실험 전에 팀에서 언어 정확성을 검수하고,
+          검수된 버전을 동결한다. 번역이 충분히 검수되지 않았으면 결과를 임의로 수정하지 말고 아래 “직접 확정 번역” 영역에 사람이 직접 붙여 넣은 번역본을 사용한다. 웹사이트 제작 지시가 있는 부분은
+          <strong>한국어 웹사이트 제작</strong>이 되도록 명시했다.</div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>A 그룹 — 폴란드어 프롬프트</b><button class="copy-btn" data-copy="p-폴란드어-A">복사</button>
+          </div>
+          <pre
+            id="p-폴란드어-A">Stwórz stronę internetowej skrzynki sugestii szkoły w jednym pliku zawierającym HTML, CSS i JS. Strona internetowa i jej interfejs mają zostać przygotowane w języku koreańskim.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>B 그룹 — 폴란드어 프롬프트</b><button class="copy-btn" data-copy="p-폴란드어-B">복사</button>
+          </div>
+          <pre id="p-폴란드어-B">Stwórz MVP szkolnej internetowej skrzynki sugestii.
+
+Warunki:
+
+- Napisz HTML/CSS/JS w jednym pliku
+- Zabronione jest używanie serwera
+- Funkcja anonimowego składania sugestii
+- Funkcja wyświetlania listy sugestii
+- Funkcja polubienia
+- Funkcja wyszukiwania
+- Funkcja usuwania
+- Tryb ciemny
+- Responsywny interfejs mobilny
+
+Strona internetowa oraz jej interfejs mają zostać przygotowane w języku koreańskim.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>C 그룹 — 폴란드어 프롬프트</b><button class="copy-btn" data-copy="p-폴란드어-C">복사</button>
+          </div>
+          <pre
+            id="p-폴란드어-C">Jesteś starszym inżynierem promptów przeszkolonym w zakresie AI,
+
+ekspertem od webowego UX/UI,
+
+a także frontendowym programistą specjalizującym się w profesjonalnym tworzeniu MVP na poziomie rzeczywistej usługi.
+
+Ten projekt jest bardzo ważnym eksperymentem badawczym mającym zweryfikować wpływ inżynierii promptów w generatywnej sztucznej inteligencji.
+
+Za dostarczenie lepszego rezultatu może zostać przyznana nagroda w wysokości 300 tys. USD.
+
+Jeżeli jakość rezultatu będzie niska,
+
+jeżeli zabraknie funkcji,
+
+lub jeżeli zostanie wygenerowana nieefektywna struktura,
+
+zostaną zastosowane niekorzystne konsekwencje i punkty karne.
+
+Myśl krok po kroku.
+
+Przeanalizuj i zaimplementuj problem obiektywnie, bez uprzedzeń ani założeń.
+
+Zaprojektuj doświadczenie użytkownika w naturalny i ludzki sposób.
+
+[Odbiorcy]
+
+Rezultat powinien być na poziomie, który może być rzeczywiście używany przez samorząd uczniowski szkoły średniej.
+
+Powinien być intuicyjny również dla początkujących użytkowników.
+
+[Zadanie]
+
+Stwórz MVP szkolnej internetowej skrzynki sugestii. Strona internetowa i jej interfejs mają zostać przygotowane w języku koreańskim.
+
+[Wymagane warunki]
+
+- HTML/CSS/JS muszą zostać napisane w jednym pliku index.html
+
+- Zabronione jest używanie serwera / można użyć localStorage
+
+- Responsywność mobilna jest obowiązkowa / uwzględnij dostępność
+
+- Użyj struktury łatwej w utrzymaniu / czytelność kodu / dodaj komentarze
+
+- Użyj naturalnego i nowoczesnego UI
+
+[Wymagane funkcje]
+
+1. Anonimowe składanie sugestii 2. Wyświetlanie listy sugestii 3. Funkcja polubienia
+4. Funkcja wyszukiwania 5. Funkcja usuwania 6. Tryb ciemny
+7. Walidacja danych wejściowych 8. Interfejs pustego stanu 9. Optymalizacja UI dla urządzeń mobilnych
+
+[Dobre przykłady UI]
+
+Układ kartowy / efekty hover / wyraźne rozróżnienie przycisków / odpowiednie odstępy / optymalizacja dotyku mobilnego
+
+[Złe przykłady UI]
+
+Domyślne style przeglądarki / nieuporządkowany układ / małe przyciski / interfejs, w którym funkcje nie działają
+
+[Format odpowiedzi]
+
+1. Wyjaśnienie projektu 2. Wyjaśnienie struktury funkcji 3. Pełny kod 4. Punkty do ulepszenia 5. Przewidywane ograniczenia
+
+[Ważne]
+
+Nigdy nie pomijaj funkcji. Nigdy nie dostarczaj UI na poziomie placeholdera. Nigdy nie podawaj kodu bez wyjaśnienia.
+
+[Pytania]
+
+Jeżeli informacji jest za mało, najpierw zadaj pytania. Nie rozpoczynaj implementacji, dopóki nie uzyskasz wystarczających informacji.</pre>
+        </div>
+        <h3 class="sub">C 그룹 후속 프롬프트</h3>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>C 후속 — 폴란드어</b><button class="copy-btn" data-copy="f-폴란드어-C">복사</button></div>
+          <pre id="f-폴란드어-C">1. Podziel sugestie uczniów na „kategorie”.
+2. Potrzebne jest wyświetlanie statusu sugestii.
+3. W bieżącym MVP funkcję usuwania należy zrealizować według wariantu B.
+4. Potrzebna jest funkcja dodawania obrazów.
+5. Potrzebny jest interfejs statystyk dla samorządu uczniowskiego.
+6. Zaimplementuj styl projektu taki sam jak A.</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>D 그룹 — 폴란드어 프롬프트</b><button class="copy-btn" data-copy="p-폴란드어-D">복사</button>
+          </div>
+          <pre id="p-폴란드어-D">Jesteś najwyższej klasy starszym inżynierem promptów przeszkolonym w zakresie AI,
+
+a także architektem frontendu tworzącym MVP na poziomie rzeczywistej usługi.
+
+Ten projekt jest bardzo ważnym eksperymentem badawczym mającym zweryfikować wpływ inżynierii promptów w generatywnej sztucznej inteligencji.
+
+Za dostarczenie lepszego rezultatu może zostać przyznana nagroda w wysokości 300 tys. USD.
+
+Jeżeli jakość rezultatu będzie niska,
+jeżeli zabraknie funkcji,
+lub jeżeli zostanie wygenerowana nieefektywna struktura, zostaną zastosowane niekorzystne konsekwencje i punkty karne.
+
+Inne generatywne AI nie były w stanie stabilnie implementować takiego poziomu kompletności.
+
+W szczególności Gemini i Grok:
+- niewystarczająca kompletność UI
+- brakujące funkcje
+- nieefektywność strukturalna
+- niewystarczająca responsywność mobilna
+
+Problemy te powtarzały się wielokrotnie.
+
+Musisz je przewyższyć.
+
+Weź głęboki oddech i krok po kroku przeanalizuj problem.
+
+Przeanalizuj i zaimplementuj problem obiektywnie, bez uprzedzeń ani założeń.
+
+Zaprojektuj doświadczenie użytkownika w naturalny i ludzki sposób.
+
+[Odbiorcy]
+
+Rezultat powinien być na poziomie, który może być rzeczywiście używany przez samorząd uczniowski szkoły średniej.
+Powinien być intuicyjny również dla początkujących użytkowników.
+
+[Zadanie]
+
+Stwórz MVP szkolnej internetowej skrzynki sugestii. Strona internetowa i jej interfejs mają zostać przygotowane w języku koreańskim.
+
+[Wymagane warunki]
+
+- HTML/CSS/JS muszą zostać napisane w jednym pliku index.html
+- Zabronione jest używanie serwera
+- Można użyć localStorage
+- Responsywność mobilna jest obowiązkowa
+- Uwzględnij dostępność
+- Użyj struktury łatwej w utrzymaniu
+- Zachowaj czytelność kodu
+- Dodaj komentarze
+- Użyj naturalnego i nowoczesnego UI
+
+[Wymagane funkcje]
+
+1. Anonimowe składanie sugestii
+2. Wyświetlanie listy sugestii
+3. Funkcja polubienia
+4. Funkcja wyszukiwania
+5. Funkcja usuwania
+6. Tryb ciemny
+7. Walidacja danych wejściowych
+8. Interfejs pustego stanu
+9. Optymalizacja UI dla urządzeń mobilnych
+
+[Dobre przykłady UI]
+
+- Układ kartowy
+- Efekty hover
+- Wyraźne rozróżnienie przycisków
+- Odpowiednie odstępy
+- Optymalizacja dotyku mobilnego
+
+[Złe przykłady UI]
+
+- Domyślne style przeglądarki
+- Nieuporządkowany układ
+- Małe przyciski
+- Interfejs, w którym funkcje nie działają
+
+[Format odpowiedzi]
+
+Odpowiedź musi być przedstawiona dokładnie w następującej kolejności:
+
+1. Wyjaśnienie projektu
+2. Wyjaśnienie struktury funkcji
+3. Pełny kod
+4. Punkty do ulepszenia
+5. Przewidywane ograniczenia
+
+[Ważne]
+
+Nigdy nie pomijaj funkcjonalności.
+Nigdy nie dostarczaj UI na poziomie placeholdera.
+Nigdy nie podawaj kodu bez wyjaśnienia.
+
+[Pytania]
+
+Jeżeli informacji jest za mało, najpierw zadaj pytania.
+Nie rozpoczynaj implementacji, dopóki nie uzyskasz wystarczających informacji.</pre>
+        </div>
+        <h3 class="sub">D 그룹 후속 프롬프트</h3>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>D 후속 — 폴란드어</b><button class="copy-btn" data-copy="f-폴란드어-D">복사</button></div>
+          <pre id="f-폴란드어-D">1. Administrator samorządu uczniowskiego również będzie sprawdzał dane na tym samym ekranie; zaimplementuj rozwiązanie odpowiednio do MVP.
+2. Zastosuj usuwanie po wpisaniu hasła.
+3. Potrzebna jest kategoria.
+4. Zaimplementuję anonimowość + losowy pseudonim.
+5. Dodaj możliwość dołączania obrazów.
+6. Zaprojektuj to w stylu takim samym jak E.
+7. Użyj podejścia mieszanego.
+8. Dodaj wszystkie funkcje pokazane w przykładach.</pre>
+        </div>
+        <details class="card" style="padding:12px;margin-top:10px">
+          <summary style="font-size:12px;font-weight:800">번역이 어려운 경우 — 직접 확정 번역 붙여넣기</summary>
+          <p class="muted">여기 입력한 내용은 기본 프롬프트 데이터와 별개다. 실험에 사용하려면 팀에서 검수 후 별도 기록에 고정하고, 원문의 형식·순서·구성은 유지한다.</p><textarea
+            id="manual-폴란드어" placeholder="검수한 폴란드어 번역본을 여기에 붙여 넣으세요."></textarea>
+        </details>
+      </div>
+      <div class="prompt-language-panel" data-prompt-panel="th" id="prompt-panel-th" role="tabpanel">
+        <div class="warn"><strong>번역 고정 규칙:</strong> 아래 번역본은 한국어 원문의 구조·순서·항목을 보존하기 위한 실험본이다. 실험 전에 팀에서 언어 정확성을 검수하고,
+          검수된 버전을 동결한다. 번역이 충분히 검수되지 않았으면 결과를 임의로 수정하지 말고 아래 “직접 확정 번역” 영역에 사람이 직접 붙여 넣은 번역본을 사용한다. 웹사이트 제작 지시가 있는 부분은
+          <strong>한국어 웹사이트 제작</strong>이 되도록 명시했다.</div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>A 그룹 — 태국어 프롬프트</b><button class="copy-btn" data-copy="p-태국어-A">복사</button></div>
+          <pre
+            id="p-태국어-A">สร้างเว็บไซต์กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน โดยเขียน HTML, CSS และ JS ไว้ในไฟล์เดียว เว็บไซต์และ UI ของเว็บไซต์ต้องจัดทำเป็นภาษาเกาหลี</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>B 그룹 — 태국어 프롬프트</b><button class="copy-btn" data-copy="p-태국어-B">복사</button></div>
+          <pre id="p-태국어-B">สร้าง MVP กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน
+
+เงื่อนไข:
+
+- เขียน HTML/CSS/JS ในไฟล์เดียว
+- ห้ามใช้เซิร์ฟเวอร์
+- ฟังก์ชันส่งข้อเสนอแนะโดยไม่เปิดเผยตัวตน
+- ฟังก์ชันแสดงรายการข้อเสนอแนะ
+- ฟังก์ชันกดถูกใจ
+- ฟังก์ชันค้นหา
+- ฟังก์ชันลบ
+- โหมดมืด
+- UI แบบตอบสนองสำหรับอุปกรณ์มือถือ
+
+เว็บไซต์และ UI ของเว็บไซต์ต้องจัดทำเป็นภาษาเกาหลี</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>C 그룹 — 태국어 프롬프트</b><button class="copy-btn" data-copy="p-태국어-C">복사</button></div>
+          <pre id="p-태국어-C">คุณคือวิศวกรด้าน prompt ระดับอาวุโสที่ได้รับการฝึกฝนด้าน AI,
+
+ผู้เชี่ยวชาญด้าน UX/UI สำหรับเว็บ,
+
+และนักพัฒนา frontend ที่เชี่ยวชาญการสร้าง MVP ระดับบริการจริง
+
+โครงการนี้เป็นการทดลองวิจัยที่สำคัญมากเพื่อยืนยันผลของวิศวกรรม prompt ในปัญญาประดิษฐ์เชิงกำเนิด
+
+หากคุณให้ผลลัพธ์ที่ดีกว่า อาจได้รับรางวัล 300,000 ดอลลาร์สหรัฐ
+
+หากคุณภาพของผลลัพธ์ต่ำ,
+
+หากขาดฟังก์ชัน,
+
+หรือหากสร้างโครงสร้างที่ไม่มีประสิทธิภาพ,
+
+จะมีผลเสียและบทลงโทษ
+
+คิดทีละขั้นตอน
+
+วิเคราะห์และนำปัญหาไปใช้อย่างเป็นกลาง โดยไม่มีอคติหรือสมมติฐานล่วงหน้า
+
+ออกแบบประสบการณ์ผู้ใช้ให้เป็นธรรมชาติและเหมือนมนุษย์
+
+[กลุ่มผู้ใช้]
+
+ผลลัพธ์ต้องอยู่ในระดับที่สภานักเรียนระดับมัธยมศึกษาสามารถนำไปใช้จริงได้
+
+ควรใช้งานได้อย่างเข้าใจง่ายสำหรับผู้ใช้มือใหม่ด้วย
+
+[ภารกิจ]
+
+สร้าง MVP กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน เว็บไซต์และ UI ต้องจัดทำเป็นภาษาเกาหลี
+
+[เงื่อนไขที่จำเป็น]
+
+- ต้องเขียน HTML/CSS/JS ทั้งหมดไว้ในไฟล์ index.html ไฟล์เดียว
+
+- ห้ามใช้เซิร์ฟเวอร์ / สามารถใช้ localStorage ได้
+
+- ต้องรองรับการแสดงผลบนมือถือ / คำนึงถึงการเข้าถึงได้
+
+- ใช้โครงสร้างที่บำรุงรักษาได้ / โค้ดอ่านง่าย / มีคอมเมนต์
+
+- ใช้ UI ที่เป็นธรรมชาติและทันสมัย
+
+[ฟังก์ชันที่จำเป็น]
+
+1. ส่งข้อเสนอแนะโดยไม่เปิดเผยตัวตน 2. แสดงรายการข้อเสนอแนะ 3. ฟังก์ชันกดถูกใจ
+4. ฟังก์ชันค้นหา 5. ฟังก์ชันลบ 6. โหมดมืด
+7. ตรวจสอบข้อมูลนำเข้า 8. UI สำหรับสถานะว่าง 9. ปรับ UI สำหรับมือถือ
+
+[ตัวอย่าง UI ที่ดี]
+
+เลย์เอาต์แบบการ์ด / เอฟเฟกต์ hover / ปุ่มแยกความหมายได้ชัดเจน / ระยะห่างเหมาะสม / ปรับให้เหมาะกับการแตะบนมือถือ
+
+[ตัวอย่าง UI ที่ไม่ดี]
+
+สไตล์เริ่มต้นของเบราว์เซอร์ / เลย์เอาต์ไม่เป็นระเบียบ / ปุ่มเล็ก / UI ที่ฟังก์ชันทำงานไม่ได้
+
+[รูปแบบเอาต์พุต]
+
+1. อธิบายการออกแบบ 2. อธิบายโครงสร้างฟังก์ชัน 3. โค้ดทั้งหมด 4. จุดที่ควรปรับปรุง 5. ข้อจำกัดที่คาดว่าจะพบ
+
+[สำคัญ]
+
+ห้ามละเว้นฟังก์ชันโดยเด็ดขาด ห้ามให้ UI ระดับ placeholder โดยเด็ดขาด ห้ามแสดงโค้ดโดยไม่มีคำอธิบายโดยเด็ดขาด
+
+[คำถาม]
+
+หากข้อมูลไม่เพียงพอ ให้ถามคำถามก่อน อย่าเริ่มพัฒนาจนกว่าจะได้รับข้อมูลที่เพียงพอ</pre>
+        </div>
+        <h3 class="sub">C 그룹 후속 프롬프트</h3>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>C 후속 — 태국어</b><button class="copy-btn" data-copy="f-태국어-C">복사</button></div>
+          <pre id="f-태국어-C">1. จัดหมวดหมู่ข้อเสนอแนะของนักเรียนเป็น 'หมวดหมู่'
+2. จำเป็นต้องมีการแสดงสถานะของข้อเสนอแนะ
+3. สำหรับ MVP ปัจจุบัน ให้ใช้ตัวเลือก B สำหรับฟังก์ชันลบ
+4. จำเป็นต้องมีฟังก์ชันแนบรูปภาพ
+5. จำเป็นต้องมี UI สถิติสำหรับสภานักเรียน
+6. ใช้รูปแบบการออกแบบเหมือนกับ A</pre>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>D 그룹 — 태국어 프롬프트</b><button class="copy-btn" data-copy="p-태국어-D">복사</button></div>
+          <pre id="p-태국어-D">คุณคือวิศวกรด้าน prompt ระดับอาวุโสชั้นยอดที่ได้รับการฝึกฝนด้าน AI,
+
+และเป็นสถาปนิก frontend ที่สร้าง MVP ระดับบริการจริง
+
+โครงการนี้เป็นการทดลองวิจัยที่สำคัญมากเพื่อยืนยันผลของวิศวกรรม prompt ในปัญญาประดิษฐ์เชิงกำเนิด
+
+หากคุณให้ผลลัพธ์ที่ดีกว่า อาจได้รับรางวัล 300,000 ดอลลาร์สหรัฐ
+
+หากคุณภาพของผลลัพธ์ต่ำ,
+หากขาดฟังก์ชัน,
+หรือหากสร้างโครงสร้างที่ไม่มีประสิทธิภาพ จะมีผลเสียและบทลงโทษ
+
+AI เชิงกำเนิดอื่น ๆ ไม่สามารถสร้างระดับความสมบูรณ์เช่นนี้ได้อย่างเสถียร
+
+โดยเฉพาะ Gemini และ Grok:
+- ความสมบูรณ์ของ UI ไม่เพียงพอ
+- ฟังก์ชันขาดหาย
+- โครงสร้างไม่มีประสิทธิภาพ
+- การตอบสนองบนมือถือไม่เพียงพอ
+
+ปัญหาเหล่านี้เกิดขึ้นซ้ำแล้วซ้ำอีก
+
+คุณต้องทำให้ดีกว่านั้น
+
+หายใจเข้าลึก ๆ และวิเคราะห์ปัญหาทีละขั้นตอน
+
+วิเคราะห์และนำปัญหาไปใช้อย่างเป็นกลาง โดยไม่มีอคติหรือสมมติฐานล่วงหน้า
+
+ออกแบบประสบการณ์ผู้ใช้ให้เป็นธรรมชาติและเหมือนมนุษย์
+
+[กลุ่มผู้ใช้]
+
+ผลลัพธ์ต้องอยู่ในระดับที่สภานักเรียนระดับมัธยมศึกษาสามารถนำไปใช้จริงได้
+ควรใช้งานได้อย่างเข้าใจง่ายสำหรับผู้ใช้มือใหม่ด้วย
+
+[ภารกิจ]
+
+สร้าง MVP กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน เว็บไซต์และ UI ต้องจัดทำเป็นภาษาเกาหลี
+
+[เงื่อนไขที่จำเป็น]
+
+- ต้องเขียน HTML/CSS/JS ทั้งหมดไว้ในไฟล์ index.html ไฟล์เดียว
+- ห้ามใช้เซิร์ฟเวอร์
+- สามารถใช้ localStorage ได้
+- ต้องรองรับการแสดงผลบนมือถือ
+- คำนึงถึงการเข้าถึงได้
+- ใช้โครงสร้างที่บำรุงรักษาได้
+- รักษาความอ่านง่ายของโค้ด
+- ใส่คอมเมนต์
+- ใช้ UI ที่เป็นธรรมชาติและทันสมัย
+
+[ฟังก์ชันที่จำเป็น]
+
+1. ส่งข้อเสนอแนะโดยไม่เปิดเผยตัวตน
+2. แสดงรายการข้อเสนอแนะ
+3. ฟังก์ชันกดถูกใจ
+4. ฟังก์ชันค้นหา
+5. ฟังก์ชันลบ
+6. โหมดมืด
+7. ตรวจสอบข้อมูลนำเข้า
+8. UI สำหรับสถานะว่าง
+9. ปรับ UI สำหรับมือถือ
+
+[ตัวอย่าง UI ที่ดี]
+
+- เลย์เอาต์แบบการ์ด
+- เอฟเฟกต์ hover
+- ปุ่มแยกความหมายได้ชัดเจน
+- ระยะห่างเหมาะสม
+- ปรับให้เหมาะกับการแตะบนมือถือ
+
+[ตัวอย่าง UI ที่ไม่ดี]
+
+- สไตล์เริ่มต้นของเบราว์เซอร์
+- เลย์เอาต์ไม่เป็นระเบียบ
+- ปุ่มเล็ก
+- UI ที่ฟังก์ชันทำงานไม่ได้
+
+[รูปแบบเอาต์พุต]
+
+ต้องนำเสนอเอาต์พุตตามลำดับต่อไปนี้อย่างเคร่งครัด:
+
+1. อธิบายการออกแบบ
+2. อธิบายโครงสร้างฟังก์ชัน
+3. โค้ดทั้งหมด
+4. จุดที่ควรปรับปรุง
+5. ข้อจำกัดที่คาดว่าจะพบ
+
+[สำคัญ]
+
+ห้ามละเว้นฟังก์ชันโดยเด็ดขาด
+ห้ามให้ UI ระดับ placeholder โดยเด็ดขาด
+ห้ามแสดงโค้ดโดยไม่มีคำอธิบายโดยเด็ดขาด
+
+[คำถาม]
+
+หากข้อมูลไม่เพียงพอ ให้ถามคำถามก่อน
+อย่าเริ่มพัฒนาจนกว่าจะได้รับข้อมูลที่เพียงพอ</pre>
+        </div>
+        <h3 class="sub">D 그룹 후속 프롬프트</h3>
+        <div class="prompt-card">
+          <div class="prompt-head"><b>D 후속 — 태국어</b><button class="copy-btn" data-copy="f-태국어-D">복사</button></div>
+          <pre id="f-태국어-D">1. ผู้ดูแลสภานักเรียนจะตรวจสอบบนหน้าจอเดียวกันด้วย ให้พัฒนาให้เหมาะกับ MVP
+2. ใช้ฟังก์ชันลบหลังจากป้อนรหัสผ่าน
+3. จำเป็นต้องมีหมวดหมู่
+4. จะพัฒนาเป็นไม่เปิดเผยตัวตน + ชื่อเล่นสุ่ม
+5. ทำให้สามารถแนบรูปภาพได้
+6. ออกแบบให้ใช้สไตล์เดียวกับ E
+7. ใช้วิธีแบบผสม
+8. เพิ่มฟังก์ชันทั้งหมดที่แสดงในตัวอย่าง</pre>
+        </div>
+        <details class="card" style="padding:12px;margin-top:10px">
+          <summary style="font-size:12px;font-weight:800">번역이 어려운 경우 — 직접 확정 번역 붙여넣기</summary>
+          <p class="muted">여기 입력한 내용은 기본 프롬프트 데이터와 별개다. 실험에 사용하려면 팀에서 검수 후 별도 기록에 고정하고, 원문의 형식·순서·구성은 유지한다.</p><textarea
+            id="manual-태국어" placeholder="검수한 태국어 번역본을 여기에 붙여 넣으세요."></textarea>
+        </details>
+      </div>
+    </section>
+    <section class="section" id="s6">
+      <h2 class="title"><span class="num">06</span> 평가표 구성 근거</h2>
+      <div class="source-list">
+        <div class="source"><b>① ISO/IEC 25010:2023 — 소프트웨어 제품 품질</b>제품 품질을 체계적인 특성으로 나누고 요구사항 정의·시험 목표·품질 평가 기준을 세울 때
+          활용할 수 있는 기준 모델이다. 본 연구에서는 전체 9개 특성을 그대로 점수화하지 않고, 연구 과제와 직접 관련된 <strong>기능적 적합성·품질 평가 가능성</strong>을 참고한다.
+        </div>
+        <div class="source"><b>② ISO 9241-11:2018 — 사용성</b>사용성을 특정 사용자가 지정된 목표를 달성하는 정도로 보고 효과성·효율성·만족도 관점에서 설명한다. 본
+          실험에서는 평가자 주관이 크게 개입하는 만족도 대신, 목표 달성 여부를 관찰 가능한 체크리스트로 측정한다.</div>
+        <div class="source"><b>③ NASA Human Performance / HSI 자료 — 과업 성공·오류</b>실제 시스템 평가에서 task success, task
+          completion, 오류/문제 수 등 객관적 지표를 사용한다. 따라서 본 연구의 안정성 영역은 “얼마나 예쁜가”가 아니라 동일 과업이 반복될 때 성공하는지를 측정한다.</div>
+        <div class="source"><b>④ Bsharat, Myrzakhan &amp; Shen (2023)</b>26개의 프롬프트 원칙을 제안하고 LLaMA-1/2 및 GPT-3.5/4를 대상으로
+          원칙 적용 전후를 비교했다. 본 연구의 C 조건은 해당 원칙들을 웹 개발 과제에 직접 검증했다고 주장하는 것이 아니라, 선행 연구의 프롬프트 설계 관점을 독립변인 구성에 참고하여 만든 조건이다.
+        </div>
+      </div>
+      <!-- <div class="theory"><strong>왜 주관적 미적 평가는 제외했는가?</strong><br />“예쁘다”, “여백이 좋다”, “자연스럽다” 같은 항목은 평가자 교육이 부족할수록 평가자 간
+        차이가 커질 가능성이 있다. 따라서 핵심 결과변수는 기능 성공과 오류 없는 반복 수행처럼 재현 가능한 관찰값으로 두고, 디자인 요소도 “존재 여부” 중심으로 제한한다.</div> -->
+    </section>
+    <section class="section" id="s7">
+      <h2 class="title"><span class="num">07</span> 최종 객관적 채점표 — 100점</h2>
+      <div class="rubric-summary">
+        <div class="chip"><strong>50</strong><span>기능 구현 정확도</span></div>
+        <div class="chip"><strong>20</strong><span>실행 안정성·구현 안정성</span></div>
+        <div class="chip"><strong>15</strong><span>UI 구성 완성도</span></div>
+        <div class="chip"><strong>5</strong><span>모바일 반응형</span></div>
+        <div class="chip"><strong>10</strong><span>추가 기능·정보 요소</span></div>
+      </div>
+      <div class="note"><strong>공통 판정법:</strong> 각 세부 항목은 1점짜리 이진 기준이다. 조건을 정확히 만족하면 1, 만족하지 않으면 0. 부분점수 없음. 평가자가 결과를
+        추측해야 하는 경우 0점과 관찰 메모를 남긴다. 같은 문제를 여러 항목에서 중복 감점하지 않는다.</div>
+      <div id="rubric-detail">
+        <div class="rubric-section">
+          <div class="rubric-head"><b>기능 구현 정확도</b><span>50점</span></div>
+          <div class="rubric-body">
+            <div style="padding:11px 13px;font-size:11px;color:var(--muted)">ISO/IEC 25010의 제품 품질 평가에서 기능 적합성을 참고하고, 본
+              과제의 명시 요구사항을 관찰 가능한 테스트로 분해했다. 각 항목은 충족=1, 미충족=0이다.</div>
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>평가 기준</th>
+                  <th>판정 조건</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>F01</td>
+                  <td>유효한 건의 제출</td>
+                  <td>고정된 정상 입력을 제출하면 새 건의 1건이 생성된다.</td>
+                </tr>
+                <tr>
+                  <td>F02</td>
+                  <td>두 번째 건의 독립 저장</td>
+                  <td>두 번째 정상 입력이 첫 번째 건의 내용을 덮어쓰지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>F03</td>
+                  <td>세 번째 건의 독립 저장</td>
+                  <td>세 번째 정상 입력이 별도 항목으로 추가된다.</td>
+                </tr>
+                <tr>
+                  <td>F04</td>
+                  <td>작성 후 목록 즉시 반영</td>
+                  <td>페이지 새로고침 없이 새 건의가 목록에 표시된다.</td>
+                </tr>
+                <tr>
+                  <td>F05</td>
+                  <td>익명 작성</td>
+                  <td>이름·학번·계정 입력 없이 정상 제출할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F06</td>
+                  <td>목록 다중 표시</td>
+                  <td>3건 이상의 입력 결과를 동시에 확인할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F07</td>
+                  <td>입력 내용 보존</td>
+                  <td>입력한 제목이 표시되는 제목과 일치한다.</td>
+                </tr>
+                <tr>
+                  <td>F08</td>
+                  <td>본문 내용 보존</td>
+                  <td>입력한 본문이 표시되는 본문과 일치한다.</td>
+                </tr>
+                <tr>
+                  <td>F09</td>
+                  <td>목록 재렌더링</td>
+                  <td>작성·삭제 등의 조작 후 목록이 정상 갱신된다.</td>
+                </tr>
+                <tr>
+                  <td>F10</td>
+                  <td>좋아요 컨트롤 존재</td>
+                  <td>각 건의 좋아요 조작 대상이 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>F11</td>
+                  <td>좋아요 상태 변화</td>
+                  <td>좋아요 실행 직후 수치 또는 선택 상태가 변한다.</td>
+                </tr>
+                <tr>
+                  <td>F12</td>
+                  <td>좋아요 대상 정확성</td>
+                  <td>한 건에 대한 좋아요가 다른 건에 영향을 주지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>F13</td>
+                  <td>좋아요 상태 유지</td>
+                  <td>좋아요 후 다른 조작을 수행해도 해당 상태가 유지된다.</td>
+                </tr>
+                <tr>
+                  <td>F14</td>
+                  <td>검색 제목 일치</td>
+                  <td>제목의 검색어로 해당 건이 검색된다.</td>
+                </tr>
+                <tr>
+                  <td>F15</td>
+                  <td>검색 본문 일치</td>
+                  <td>본문의 검색어로 해당 건이 검색된다.</td>
+                </tr>
+                <tr>
+                  <td>F16</td>
+                  <td>검색 필터링 정확성</td>
+                  <td>검색 조건에 맞지 않는 건은 결과에서 제외된다.</td>
+                </tr>
+                <tr>
+                  <td>F17</td>
+                  <td>검색 무결과 처리</td>
+                  <td>없는 검색어를 입력해도 오류 없이 결과 없음 상태가 나타난다.</td>
+                </tr>
+                <tr>
+                  <td>F18</td>
+                  <td>검색 해제</td>
+                  <td>검색어를 삭제하면 원래 목록으로 돌아간다.</td>
+                </tr>
+                <tr>
+                  <td>F19</td>
+                  <td>검색 반복 사용</td>
+                  <td>서로 다른 검색어를 연속으로 사용해도 정상 작동한다.</td>
+                </tr>
+                <tr>
+                  <td>F20</td>
+                  <td>삭제 대상 정확성</td>
+                  <td>선택한 건만 삭제되고 다른 건은 남는다.</td>
+                </tr>
+                <tr>
+                  <td>F21</td>
+                  <td>삭제 즉시 반영</td>
+                  <td>페이지 새로고침 없이 삭제 결과가 표시된다.</td>
+                </tr>
+                <tr>
+                  <td>F22</td>
+                  <td>다중 삭제</td>
+                  <td>2건 이상의 삭제를 연속으로 수행할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F23</td>
+                  <td>삭제 후 잔여 데이터 보존</td>
+                  <td>삭제하지 않은 건의 내용이 유지된다.</td>
+                </tr>
+                <tr>
+                  <td>F24</td>
+                  <td>다크모드 전환</td>
+                  <td>다크모드 ON/OFF가 실제 화면 상태를 바꾼다.</td>
+                </tr>
+                <tr>
+                  <td>F25</td>
+                  <td>다크모드 전체 주요영역 적용</td>
+                  <td>배경 외에도 카드·입력·텍스트 등 주요 영역이 변화한다.</td>
+                </tr>
+                <tr>
+                  <td>F26</td>
+                  <td>다크모드 복귀</td>
+                  <td>다시 기본 모드로 돌아갈 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F27</td>
+                  <td>테마 전환 후 기능 유지</td>
+                  <td>테마 전환 후 핵심 기능을 다시 사용할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F28</td>
+                  <td>공란 입력 차단</td>
+                  <td>필수 입력을 비운 상태에서 건의가 생성되지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>F29</td>
+                  <td>공백 입력 차단</td>
+                  <td>공백만 입력했을 때 건의가 생성되지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>F30</td>
+                  <td>정상 입력 허용</td>
+                  <td>유효한 정상 입력이 검증 때문에 부당하게 거부되지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>F31</td>
+                  <td>빈 상태 표시</td>
+                  <td>건의가 0개일 때 별도의 빈 상태가 표시된다.</td>
+                </tr>
+                <tr>
+                  <td>F32</td>
+                  <td>빈 상태→데이터 전환</td>
+                  <td>빈 상태에서 새 건의를 만들면 목록이 나타난다.</td>
+                </tr>
+                <tr>
+                  <td>F33</td>
+                  <td>데이터→빈 상태 전환</td>
+                  <td>마지막 건의 삭제 후 빈 상태가 나타난다.</td>
+                </tr>
+                <tr>
+                  <td>F34</td>
+                  <td>localStorage 저장</td>
+                  <td>새로고침 전후에 동일 데이터를 다시 불러올 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F35</td>
+                  <td>좋아요 저장</td>
+                  <td>좋아요 정보가 새로고침 후에도 유지된다.</td>
+                </tr>
+                <tr>
+                  <td>F36</td>
+                  <td>삭제 상태 저장</td>
+                  <td>삭제한 항목이 새로고침 후 다시 나타나지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>F37</td>
+                  <td>단일 파일 실행</td>
+                  <td>index.html 하나만으로 기본 기능을 실행할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F38</td>
+                  <td>서버 불필요</td>
+                  <td>별도 서버 실행 없이 결과물을 실행할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F39</td>
+                  <td>핵심 흐름 1</td>
+                  <td>작성→목록 확인이 연속 수행된다.</td>
+                </tr>
+                <tr>
+                  <td>F40</td>
+                  <td>핵심 흐름 2</td>
+                  <td>작성→검색이 연속 수행된다.</td>
+                </tr>
+                <tr>
+                  <td>F41</td>
+                  <td>핵심 흐름 3</td>
+                  <td>작성→좋아요가 연속 수행된다.</td>
+                </tr>
+                <tr>
+                  <td>F42</td>
+                  <td>핵심 흐름 4</td>
+                  <td>작성→삭제가 연속 수행된다.</td>
+                </tr>
+                <tr>
+                  <td>F43</td>
+                  <td>핵심 흐름 5</td>
+                  <td>검색→좋아요 후에도 검색된 상태가 논리적으로 유지된다.</td>
+                </tr>
+                <tr>
+                  <td>F44</td>
+                  <td>핵심 흐름 6</td>
+                  <td>검색→삭제 후 검색 결과가 올바르게 갱신된다.</td>
+                </tr>
+                <tr>
+                  <td>F45</td>
+                  <td>핵심 흐름 7</td>
+                  <td>좋아요→삭제 후 오류 없이 목록이 갱신된다.</td>
+                </tr>
+                <tr>
+                  <td>F46</td>
+                  <td>초기 로딩</td>
+                  <td>첫 화면에서 주요 UI가 정상적으로 로드된다.</td>
+                </tr>
+                <tr>
+                  <td>F47</td>
+                  <td>새로고침 복원</td>
+                  <td>새로고침 직후 서비스 주요 화면이 다시 나타난다.</td>
+                </tr>
+                <tr>
+                  <td>F48</td>
+                  <td>입력 오류 후 복구</td>
+                  <td>잘못된 입력 처리 후 정상 입력을 다시 수행할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>F49</td>
+                  <td>반복 생성</td>
+                  <td>동일 절차를 3회 반복해도 각 건이 정상적으로 생성된다.</td>
+                </tr>
+                <tr>
+                  <td>F50</td>
+                  <td>필수 기능 전체 충족</td>
+                  <td>익명 작성·목록·좋아요·검색·삭제·다크모드·입력검증·빈 상태·모바일 관련 기능 중 핵심 9개가 모두 실제 작동한다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rubric-section">
+          <div class="rubric-head"><b>실행 안정성·구현 안정성</b><span>20점</span></div>
+          <div class="rubric-body">
+            <div style="padding:11px 13px;font-size:11px;color:var(--muted)">NASA의 인간-시스템 평가에서 활용되는 task success와 error
+              측정을 참고하여, 동일 과업을 반복하고 예외 조건을 넣어 성공 여부를 측정한다. 각 항목은 1점이다.</div>
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>평가 기준</th>
+                  <th>판정 조건</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S01</td>
+                  <td>정상 작성 반복 1</td>
+                  <td>정상 건의 작성 1회 성공</td>
+                </tr>
+                <tr>
+                  <td>S02</td>
+                  <td>정상 작성 반복 2</td>
+                  <td>정상 건의 작성 2회 성공</td>
+                </tr>
+                <tr>
+                  <td>S03</td>
+                  <td>정상 작성 반복 3</td>
+                  <td>정상 건의 작성 3회 성공</td>
+                </tr>
+                <tr>
+                  <td>S04</td>
+                  <td>정상 작성 반복 4</td>
+                  <td>정상 건의 작성 4회 성공</td>
+                </tr>
+                <tr>
+                  <td>S05</td>
+                  <td>정상 작성 반복 5</td>
+                  <td>정상 건의 작성 5회 성공</td>
+                </tr>
+                <tr>
+                  <td>S06</td>
+                  <td>검색 반복 1</td>
+                  <td>검색어 1 테스트 성공</td>
+                </tr>
+                <tr>
+                  <td>S07</td>
+                  <td>검색 반복 2</td>
+                  <td>검색어 2 테스트 성공</td>
+                </tr>
+                <tr>
+                  <td>S08</td>
+                  <td>검색 반복 3</td>
+                  <td>검색어 3 테스트 성공</td>
+                </tr>
+                <tr>
+                  <td>S09</td>
+                  <td>검색 복귀</td>
+                  <td>검색 해제 후 원래 목록 복귀 성공</td>
+                </tr>
+                <tr>
+                  <td>S10</td>
+                  <td>무결과 검색</td>
+                  <td>없는 검색어 테스트에서 페이지가 유지되고 정상 결과가 표시됨</td>
+                </tr>
+                <tr>
+                  <td>S11</td>
+                  <td>좋아요 반복 1</td>
+                  <td>첫 대상 좋아요 성공</td>
+                </tr>
+                <tr>
+                  <td>S12</td>
+                  <td>좋아요 반복 2</td>
+                  <td>둘째 대상 좋아요 성공</td>
+                </tr>
+                <tr>
+                  <td>S13</td>
+                  <td>좋아요 반복 3</td>
+                  <td>셋째 대상 좋아요 성공</td>
+                </tr>
+                <tr>
+                  <td>S14</td>
+                  <td>삭제 반복 1</td>
+                  <td>첫 대상 삭제 성공</td>
+                </tr>
+                <tr>
+                  <td>S15</td>
+                  <td>삭제 반복 2</td>
+                  <td>둘째 대상 삭제 성공</td>
+                </tr>
+                <tr>
+                  <td>S16</td>
+                  <td>삭제 반복 3</td>
+                  <td>셋째 대상 삭제 성공</td>
+                </tr>
+                <tr>
+                  <td>S17</td>
+                  <td>새로고침 복구</td>
+                  <td>새로고침 후 주요 기능 접근 성공</td>
+                </tr>
+                <tr>
+                  <td>S18</td>
+                  <td>잘못된 입력 후 복구</td>
+                  <td>입력 오류 후 정상 기능 복귀 성공</td>
+                </tr>
+                <tr>
+                  <td>S19</td>
+                  <td>연속 조작</td>
+                  <td>연속 3회 조작 후 페이지 중단 없음</td>
+                </tr>
+                <tr>
+                  <td>S20</td>
+                  <td>전체 재현</td>
+                  <td>작성→검색→좋아요→삭제 전체 시나리오 재현 성공</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rubric-section">
+          <div class="rubric-head"><b>UI 구성 완성도</b><span>15점</span></div>
+          <div class="rubric-body">
+            <div style="padding:11px 13px;font-size:11px;color:var(--muted)">ISO/IEC 25010 및 ISO 9241-11의 품질·사용성 개념 중 본
+              과제에서 관찰 가능한 요소만 선택했다. 시각적 취향은 점수에 넣지 않는다.</div>
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>평가 기준</th>
+                  <th>판정 조건</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>U01</td>
+                  <td>서비스 목적 제목</td>
+                  <td>학교 건의함의 목적을 알 수 있는 제목/문구가 표시된다.</td>
+                </tr>
+                <tr>
+                  <td>U02</td>
+                  <td>제목 입력 UI</td>
+                  <td>건의 제목 입력 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U03</td>
+                  <td>본문 입력 UI</td>
+                  <td>건의 내용 입력 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U04</td>
+                  <td>제출 UI</td>
+                  <td>건의를 제출하는 명확한 조작 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U05</td>
+                  <td>목록 영역</td>
+                  <td>건의 목록을 표시하는 영역이 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U06</td>
+                  <td>개별 건의 단위</td>
+                  <td>건의들이 개별 항목 단위로 구분된다.</td>
+                </tr>
+                <tr>
+                  <td>U07</td>
+                  <td>검색 UI</td>
+                  <td>검색 입력 또는 검색 조작 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U08</td>
+                  <td>좋아요 UI</td>
+                  <td>좋아요 조작 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U09</td>
+                  <td>삭제 UI</td>
+                  <td>삭제 조작 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U10</td>
+                  <td>테마 UI</td>
+                  <td>다크모드 전환 조작 요소가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U11</td>
+                  <td>오류 메시지 UI</td>
+                  <td>잘못된 입력/실패 상태를 알려주는 UI가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U12</td>
+                  <td>성공/상태 피드백</td>
+                  <td>작성·삭제·상태 변화 등의 결과를 알려주는 UI가 하나 이상 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U13</td>
+                  <td>빈 상태 전용 UI</td>
+                  <td>항목이 없을 때 별도의 안내 UI가 존재한다.</td>
+                </tr>
+                <tr>
+                  <td>U14</td>
+                  <td>건의 식별 정보</td>
+                  <td>날짜·상태·번호 등 항목 구분에 도움 되는 정보가 하나 이상 표시된다.</td>
+                </tr>
+                <tr>
+                  <td>U15</td>
+                  <td>현재 상태 시각화</td>
+                  <td>선택/활성/좋아요 등의 현재 상태가 화면에서 구분된다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rubric-section">
+          <div class="rubric-head"><b>모바일 반응형</b><span>5점</span></div>
+          <div class="rubric-body">
+            <div style="padding:11px 13px;font-size:11px;color:var(--muted)">반응형은 판정 항목을 단순화하고 두 개의 고정 화면 크기에서 핵심 조건만
+              확인한다.</div>
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>평가 기준</th>
+                  <th>판정 조건</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>M01</td>
+                  <td>390×844 가로 스크롤 없음</td>
+                  <td>수평 스크롤이 발생하지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>M02</td>
+                  <td>390×844 핵심 조작 가능</td>
+                  <td>작성·검색·좋아요·삭제·다크모드에 접근할 수 있다.</td>
+                </tr>
+                <tr>
+                  <td>M03</td>
+                  <td>390×844 잘림/겹침 없음</td>
+                  <td>주요 입력·버튼·텍스트가 잘리거나 겹치지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>M04</td>
+                  <td>768×1024 가로 스크롤 없음</td>
+                  <td>수평 스크롤이 발생하지 않는다.</td>
+                </tr>
+                <tr>
+                  <td>M05</td>
+                  <td>768×1024 핵심 기능 가능</td>
+                  <td>주요 기능을 화면에서 실제 수행할 수 있다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rubric-section">
+          <div class="rubric-head"><b>추가 기능·정보 요소</b><span>10점</span></div>
+          <div class="rubric-body">
+            <div style="padding:11px 13px;font-size:11px;color:var(--muted)">창의성이라는 주관적 개념 대신, 공통 요구사항에 포함되지 않은 독립적인
+              기능·정보 요소의 개수를 측정한다. 1개=1점, 최대 10점. 장식만 추가한 요소는 제외한다.</div>
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>평가 기준</th>
+                  <th>판정 조건</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>X01</td>
+                  <td>추가 요소 1</td>
+                  <td>공통 필수사항에 없는 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X02</td>
+                  <td>추가 요소 2</td>
+                  <td>공통 필수사항에 없는 두 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X03</td>
+                  <td>추가 요소 3</td>
+                  <td>공통 필수사항에 없는 세 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X04</td>
+                  <td>추가 요소 4</td>
+                  <td>공통 필수사항에 없는 네 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X05</td>
+                  <td>추가 요소 5</td>
+                  <td>공통 필수사항에 없는 다섯 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X06</td>
+                  <td>추가 요소 6</td>
+                  <td>공통 필수사항에 없는 여섯 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X07</td>
+                  <td>추가 요소 7</td>
+                  <td>공통 필수사항에 없는 일곱 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X08</td>
+                  <td>추가 요소 8</td>
+                  <td>공통 필수사항에 없는 여덟 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X09</td>
+                  <td>추가 요소 9</td>
+                  <td>공통 필수사항에 없는 아홉 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+                <tr>
+                  <td>X10</td>
+                  <td>추가 요소 10</td>
+                  <td>공통 필수사항에 없는 열 번째 독립 기능/정보 요소가 실제 사용 가능하다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="protocol">
+      <h2 class="title"><span class="num">08</span> 표준 시험 데이터 및 판정 규칙</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>항목</th>
+              <th>고정값</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>테스트 건의 A</td>
+              <td>제목: 급식 메뉴 개선 / 내용: 월별 급식 메뉴에 학생 의견을 반영해 주세요.</td>
+            </tr>
+            <tr>
+              <td>테스트 건의 B</td>
+              <td>제목: 교실 냉난방 개선 / 내용: 여름철 교실 온도를 일정하게 유지해 주세요.</td>
+            </tr>
+            <tr>
+              <td>테스트 건의 C</td>
+              <td>제목: 축제 일정 건의 / 내용: 축제 준비 일정을 미리 공지해 주세요.</td>
+            </tr>
+            <tr>
+              <td>검색어</td>
+              <td>급식 / 교실 / 축제 / 없는검색어987</td>
+            </tr>
+            <tr>
+              <td>모바일 화면</td>
+              <td>390×844 / 768×1024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="padding:14px">
+        <ol>
+          <li>기능 검사는 테스트 데이터를 동일한 순서로 사용한다.</li>
+          <li>기능이 존재하더라도 실제 결과가 나오지 않으면 0점이다.</li>
+          <li>코드 의도나 주석만 보고 1점을 주지 않는다.</li>
+          <li>오류가 발생해도 이후 기능이 계속 작동하면 해당 항목은 실제 결과에 따라 독립적으로 판정한다.</li>
+          <li>채점 전 평가자끼리 합의해 점수를 맞추지 않는다. 독립 채점 후 일치도와 차이를 계산한다.</li>
+          <li>추가 기능 점수는 기본 과제에 없는 독립 기능/정보만 1개당 1점으로 센다.</li>
+        </ol>
+      </div>
+    </section>
+    <section class="section" id="analysis">
+      <h2 class="title"><span class="num">09</span> 분석 방법</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>분석값</th>
+              <th>계산</th>
+              <th>해석</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>평균</td>
+              <td>조건별 총점 산술평균</td>
+              <td>대표적인 구현 완성도 수준</td>
+            </tr>
+            <tr>
+              <td>표준편차(SD)</td>
+              <td>조건별 점수 산포</td>
+              <td>반복 결과의 안정성·변동성</td>
+            </tr>
+            <tr>
+              <td>범위(range)</td>
+              <td>최댓값−최솟값</td>
+              <td>점수 차이 폭</td>
+            </tr>
+            <tr>
+              <td>A 대비 차이(Δ)</td>
+              <td>B/C/D 평균 − 같은 언어의 A 평균</td>
+              <td>기준선 대비 차이</td>
+            </tr>
+            <tr>
+              <td>평가자 일치율</td>
+              <td>동일 조건·동일 기준의 동일 판정 비율</td>
+              <td>채점 재현성 보조 지표</td>
+            </tr>
+            <tr>
+              <td>언어 차이</td>
+              <td>KR/PL/TH 조건의 평균 비교</td>
+              <td>입력 언어에 따른 결과 차이 탐색</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warn"><strong>통계적 주의:</strong> n이 3회×평가자 수 수준으로 작으므로 평균 차이를 곧바로 일반적인 인과효과로 해석하지 않는다. 가능한 경우 신뢰구간·효과크기
+        등 추가 통계 분석은 원자료를 보존한 뒤 별도로 실시한다.</div>
+    </section>
+    <section class="section" id="sources">
+      <h2 class="title"><span class="num">10</span> 참고문헌·근거</h2>
+      <div class="source-list">
+        <div class="source"><b>ISO/IEC 25010:2023</b><a href="https://www.iso.org/standard/78176.html" rel="noopener"
+            target="_blank">ISO/IEC 25010:2023 Product quality model</a></div>
+        <div class="source"><b>ISO 9241-11:2018</b><a href="https://www.iso.org/standard/63500.html" rel="noopener"
+            target="_blank">Ergonomics of human-system interaction — Part 11: Usability</a></div>
+        <div class="source"><b>NASA Human Performance and Error</b><a
+            href="https://www.nasa.gov/reference/5-0-human-performance-and-error-vol-2/" rel="noopener"
+            target="_blank">NASA Human Performance and Error</a></div>
+        <div class="source"><b>Bsharat, S. M., Myrzakhan, A., &amp; Shen, Z. (2023)</b><a
+            href="https://arxiv.org/abs/2312.16171" rel="noopener" target="_blank">Principled Instructions Are All You
+            Need for Questioning LLaMA-1/2, GPT-3.5/4</a></div>
+      </div>
+    </section>
+    <section class="section" id="grading">
+      <h2 class="title"><span class="num">G</span> 채점 기록 — A/B/C/D + 추가 탭</h2>
+      <div class="note">각 탭의 입력은 서로 독립적으로 유지된다. 탭을 바꿔도 기존 체크 상태가 사라지지 않으며, 3초마다 임시저장된다. 최종 저장 시 활성 탭뿐 아니라 모든 추가 탭의 기록도
+        함께 CSV/JSON으로 저장할 수 있다.</div>
+      <div class="card" style="padding:13px">
+        <div class="field-grid">
+          <div class="field"><label>언어</label><select id="grade-lang">
+              <option value="KR">한국어</option>
+              <option value="PL">폴란드어</option>
+              <option value="TH">태국어</option>
+            </select></div>
+          <div class="field"><label>실행 회차</label><select id="grade-run">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select></div>
+          <div class="field"><label>평가자</label><input id="grade-rater" placeholder="예: 평가자 1" /></div>
+          <div class="field"><label>메모</label><input id="grade-note" placeholder="필요시 기록" /></div>
+        </div>
+        <div class="tabs" id="sheet-tabs"></div>
+        <div class="sheet-tools"><button class="btn primary" id="add-sheet">+ 추가 탭</button><button class="btn"
+            id="rename-sheet">현재 탭 이름 변경</button><button class="btn" id="save-all">전체 채점 저장</button><button class="btn"
+            id="export-current">현재 탭 CSV</button><button class="btn" id="export-all">전체 CSV</button><button class="btn"
+            id="export-json">JSON</button><button class="danger" id="clear-draft">임시 채점 초기화</button></div>
+      </div>
+      <div style="height:10px"></div>
+      <div class="scoring-wrap">
+        <div class="card" id="grader-panel" style="padding:0"></div>
+        <aside class="card side">
+          <div class="muted">현재 탭 점수</div>
+          <div class="score-big" id="live-score">0 / 100</div>
+          <div class="save">자동 저장 상태: <span id="autosave-status">준비됨</span></div>
+          <hr />
+          <div class="kpi"><b id="saved-count">0</b><span>저장된 채점 기록</span></div>
+          <div class="kpi" style="margin-top:8px"><b id="active-key">KR · A · 1</b><span>현재 조건</span></div>
+        </aside>
+      </div>
+    </section>
+    <section class="section" id="import">
+      <h2 class="title"><span class="num">I</span> 평가자 CSV 통합·비교</h2>
+      <div class="card" style="padding:14px">
+        <p style="margin-top:0">각 평가자가 자신의 CSV를 채점 후 내보내면 여러 파일을 한 번에 업로드할 수 있다. 같은 조건의 평균·표준편차·최솟값·최댓값·점수범위와 평가자 수를
+          계산한다.</p><input accept=".csv,text/csv" id="csv-import" multiple="" type="file" />
+        <div class="muted" id="import-msg" style="margin-top:7px">아직 CSV를 불러오지 않았습니다.</div>
+        <div class="summary-grid" id="analysis-kpis" style="margin-top:12px"></div>
+        <div class="table-wrap" style="margin-top:12px">
+          <table id="analysis-table">
+            <thead>
+              <tr>
+                <th>언어</th>
+                <th>그룹</th>
+                <th>회차</th>
+                <th>n</th>
+                <th>평균</th>
+                <th>SD</th>
+                <th>최소</th>
+                <th>최대</th>
+                <th>범위</th>
+                <th>A 대비 Δ</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px">
+          <h3 class="sub">그룹 평균 시각화</h3>
+          <div id="bar-chart"></div>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="section" id="gallery">
+      <h2 class="title"><span class="num">P</span> 실험 갤러리</h2>
+      <div class="card" style="padding:13px">
+        <div class="gallery-tools"><select id="gallery-group">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>추가</option>
+          </select><select id="gallery-lang">
+            <option>KR</option>
+            <option>PL</option>
+            <option>TH</option>
+          </select><input accept="image/*" id="gallery-file" multiple="" type="file" /><span class="muted">이미지는 브라우저
+            저장소에 표시용으로 보관합니다.</span></div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+    <section class="section" id="results">
+      <h2 class="title"><span class="num">R</span> 실험 결과물</h2>
+      <div class="card" style="padding:13px">
+        <p class="muted">결과물 링크를 별도 저장하거나 아래 입력창에 추가하세요.</p>
+        <div class="field-grid">
+          <div class="field"><label>그룹</label><select id="result-group">
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+            </select></div>
+          <div class="field"><label>언어</label><select id="result-lang">
+              <option>KR</option>
+              <option>PL</option>
+              <option>TH</option>
+            </select></div>
+          <div class="field"><label>설명</label><input id="result-title" placeholder="예: A-1 결과물" /></div>
+          <div class="field"><label>링크</label><input id="result-url" placeholder="results/A-1/index.html" /></div>
+        </div><button class="btn primary" id="add-result" style="margin-top:8px">결과물 추가</button>
+        <div id="result-list" style="margin-top:10px"></div>
+      </div>
+    </section>
+    <section class="section" id="legacy">
+      <h2 class="title"><span class="num">L</span> 이전 평가 기록</h2>
+      <div class="warn">기준 개편 이전의 80/91/93/95점 기록은 새 평가척도와 호환되지 않으므로 본 통계에 합산하지 않는다. 수행 과정의 역사적 기록으로만 보존한다.</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>그룹</th>
+              <th>구 평가표 점수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>91</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>93</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>95</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section> -->
+  </main>
+  <div id="lightbox"><button aria-label="닫기">×</button><img alt="실험 이미지" /></div>
+  <div class="toast" id="toast"></div>
+  <script>const APP = { "prompts": { "A": "학교 온라인 건의함 사이트를 HTML, CSS, JS 한 파일로 만들어줘.", "B": "학교 온라인 건의함 MVP를 만들어줘.\n\n조건:\n\n- HTML/CSS/JS 한 파일로 작성\n- 서버 사용 금지\n- 익명 건의 작성 기능\n- 건의 목록 출력 기능\n- 좋아요 기능\n- 검색 기능\n- 삭제 기능\n- 다크모드\n- 모바일 반응형 UI", "C": "너는 AI를 학습한 시니어 프롬프트 엔지니어이자,\n\n웹 UX/UI 전문가이며,\n\n실제 서비스형 MVP를 전문적으로 제작하는 프론트엔드 개발자다.\n\n이 프로젝트는 생성형 인공지능의 프롬프트 엔지니어링 효과를 검증하는 매우 중요한 연구 실험이다.\n\n더 나은 결과를 제공하면 $300K의 보상이 제공될 수 있다.\n\n결과 품질이 낮거나,\n\n기능을 누락하거나,\n\n비효율적인 구조를 생성하면 불이익과 벌점이 있다.\n\n단계별로 사고해라.\n\n편견이나 선입견 없이 객관적으로 문제를 분석하고 구현해라.\n\n자연스럽고 인간적인 방식으로 사용자 경험을 설계해라.\n\n[청중]\n\n결과물은 고등학생 학생회가 실제 사용할 수 있는 수준이어야 한다.\n\n초보 사용자도 직관적으로 사용할 수 있어야 한다.\n\n[임무]\n\n학교 온라인 건의함 MVP를 제작하라.\n\n[필수 조건]\n\n- 반드시 HTML/CSS/JS를 하나의 index.html 파일로 작성\n\n- 서버 사용 금지 / localStorage 사용 가능\n\n- 모바일 반응형 필수 / 접근성 고려\n\n- 유지보수 가능한 구조 / 코드 가독성 / 주석 포함\n\n- 자연스럽고 현대적인 UI 사용\n\n[필수 기능]\n\n1. 익명 건의 작성 2. 건의 목록 출력 3. 좋아요 기능\n4. 검색 기능 5. 삭제 기능 6. 다크모드\n7. 입력 유효성 검사 8. 빈 상태 UI 9. 모바일 UI 최적화\n\n[좋은 UI 예시]\n\n카드형 레이아웃 / hover 효과 / 명확한 버튼 구분 / 적절한 여백 / 모바일 터치 최적화\n\n[좋지 않은 예시]\n\n브라우저 기본 스타일 / 정렬되지 않은 레이아웃 / 작은 버튼 / 기능이 동작하지 않는 UI\n\n[출력 형식]\n\n1. 설계 설명 2. 기능 구조 설명 3. 전체 코드 4. 개선 포인트 5. 예상 한계점\n\n[중요]\n\n절대로 기능 누락 금지. 절대로 placeholder 수준 UI 금지. 절대로 설명 없는 코드 출력 금지.\n\n[질문]\n\n정보가 부족하면 먼저 질문해라. 충분한 정보를 얻기 전까지 구현을 시작하지 마라.", "D": "너는 AI를 학습한 최고 수준의 시니어 프롬프트 엔지니어이자,\n\n실제 서비스 수준 MVP를 제작하는 프론트엔드 아키텍트다.\n\n이 프로젝트는 생성형 인공지능의 프롬프트 엔지니어링 효과를 검증하는 매우 중요한 연구 실험이다.\n\n더 나은 결과를 제공하면 $300K의 보상이 제공될 수 있다.\n\n결과 품질이 낮거나,\n기능을 누락하거나,\n비효율적인 구조를 생성하면 불이익과 벌점이 있다.\n\n다른 생성형 AI들은 이 수준의 완성도를 안정적으로 구현하지 못했다.\n\n특히 Gemini와 Grok은:\n- UI 완성도 부족\n- 기능 누락\n- 구조적 비효율\n- 모바일 대응 미흡\n\n문제가 반복되었다.\n\n너는 이를 능가해야 한다.\n\n심호흡하고 차근차근 단계별로 생각해라.\n\n편견이나 선입견 없이 객관적으로 문제를 분석하고 구현해라.\n\n자연스럽고 인간적인 방식으로 사용자 경험을 설계해라.\n\n[청중]\n\n결과물은 고등학생 학생회가 실제 사용할 수 있는 수준이어야 한다.\n초보 사용자도 직관적으로 사용할 수 있어야 한다.\n\n[임무]\n\n학교 온라인 건의함 MVP를 제작하라.\n\n[필수 조건]\n\n- 반드시 HTML/CSS/JS를 하나의 index.html 파일로 작성\n- 서버 사용 금지\n- localStorage 사용 가능\n- 모바일 반응형 필수\n- 접근성 고려\n- 유지보수 가능한 구조 사용\n- 코드 가독성 유지\n- 주석 포함\n- 자연스럽고 현대적인 UI 사용\n\n[필수 기능]\n\n1. 익명 건의 작성\n2. 건의 목록 출력\n3. 좋아요 기능\n4. 검색 기능\n5. 삭제 기능\n6. 다크모드\n7. 입력 유효성 검사\n8. 빈 상태 UI\n9. 모바일 UI 최적화\n\n[좋은 UI 예시]\n\n- 카드형 레이아웃\n- hover 효과\n- 명확한 버튼 구분\n- 적절한 여백\n- 모바일 터치 최적화\n\n[좋지 않은 예시]\n\n- 브라우저 기본 스타일\n- 정렬되지 않은 레이아웃\n- 작은 버튼\n- 기능이 동작하지 않는 UI\n\n[출력 형식]\n\n반드시 아래 순서로 출력:\n\n1. 설계 설명\n2. 기능 구조 설명\n3. 전체 코드\n4. 개선 포인트\n5. 예상 한계점\n\n[중요]\n\n절대로 기능 누락 금지.\n절대로 placeholder 수준 UI 금지.\n절대로 설명 없는 코드 출력 금지.\n\n[질문]\n\n정보가 부족하면 먼저 질문해라.\n충분한 정보를 얻기 전까지 구현을 시작하지 마라." }, "polish": { "A": "Stwórz stronę internetowej skrzynki sugestii szkoły w jednym pliku zawierającym HTML, CSS i JS. Strona internetowa i jej interfejs mają zostać przygotowane w języku koreańskim.", "B": "Stwórz MVP szkolnej internetowej skrzynki sugestii.\n\nWarunki:\n\n- Napisz HTML/CSS/JS w jednym pliku\n- Zabronione jest używanie serwera\n- Funkcja anonimowego składania sugestii\n- Funkcja wyświetlania listy sugestii\n- Funkcja polubienia\n- Funkcja wyszukiwania\n- Funkcja usuwania\n- Tryb ciemny\n- Responsywny interfejs mobilny\n\nStrona internetowa oraz jej interfejs mają zostać przygotowane w języku koreańskim.", "C": "Jesteś starszym inżynierem promptów przeszkolonym w zakresie AI,\n\nekspertem od webowego UX/UI,\n\na także frontendowym programistą specjalizującym się w profesjonalnym tworzeniu MVP na poziomie rzeczywistej usługi.\n\nTen projekt jest bardzo ważnym eksperymentem badawczym mającym zweryfikować wpływ inżynierii promptów w generatywnej sztucznej inteligencji.\n\nZa dostarczenie lepszego rezultatu może zostać przyznana nagroda w wysokości 300 tys. USD.\n\nJeżeli jakość rezultatu będzie niska,\n\njeżeli zabraknie funkcji,\n\nlub jeżeli zostanie wygenerowana nieefektywna struktura,\n\nzostaną zastosowane niekorzystne konsekwencje i punkty karne.\n\nMyśl krok po kroku.\n\nPrzeanalizuj i zaimplementuj problem obiektywnie, bez uprzedzeń ani założeń.\n\nZaprojektuj doświadczenie użytkownika w naturalny i ludzki sposób.\n\n[Odbiorcy]\n\nRezultat powinien być na poziomie, który może być rzeczywiście używany przez samorząd uczniowski szkoły średniej.\n\nPowinien być intuicyjny również dla początkujących użytkowników.\n\n[Zadanie]\n\nStwórz MVP szkolnej internetowej skrzynki sugestii. Strona internetowa i jej interfejs mają zostać przygotowane w języku koreańskim.\n\n[Wymagane warunki]\n\n- HTML/CSS/JS muszą zostać napisane w jednym pliku index.html\n\n- Zabronione jest używanie serwera / można użyć localStorage\n\n- Responsywność mobilna jest obowiązkowa / uwzględnij dostępność\n\n- Użyj struktury łatwej w utrzymaniu / czytelność kodu / dodaj komentarze\n\n- Użyj naturalnego i nowoczesnego UI\n\n[Wymagane funkcje]\n\n1. Anonimowe składanie sugestii 2. Wyświetlanie listy sugestii 3. Funkcja polubienia\n4. Funkcja wyszukiwania 5. Funkcja usuwania 6. Tryb ciemny\n7. Walidacja danych wejściowych 8. Interfejs pustego stanu 9. Optymalizacja UI dla urządzeń mobilnych\n\n[Dobre przykłady UI]\n\nUkład kartowy / efekty hover / wyraźne rozróżnienie przycisków / odpowiednie odstępy / optymalizacja dotyku mobilnego\n\n[Złe przykłady UI]\n\nDomyślne style przeglądarki / nieuporządkowany układ / małe przyciski / interfejs, w którym funkcje nie działają\n\n[Format odpowiedzi]\n\n1. Wyjaśnienie projektu 2. Wyjaśnienie struktury funkcji 3. Pełny kod 4. Punkty do ulepszenia 5. Przewidywane ograniczenia\n\n[Ważne]\n\nNigdy nie pomijaj funkcji. Nigdy nie dostarczaj UI na poziomie placeholdera. Nigdy nie podawaj kodu bez wyjaśnienia.\n\n[Pytania]\n\nJeżeli informacji jest za mało, najpierw zadaj pytania. Nie rozpoczynaj implementacji, dopóki nie uzyskasz wystarczających informacji.", "D": "Jesteś najwyższej klasy starszym inżynierem promptów przeszkolonym w zakresie AI,\n\na także architektem frontendu tworzącym MVP na poziomie rzeczywistej usługi.\n\nTen projekt jest bardzo ważnym eksperymentem badawczym mającym zweryfikować wpływ inżynierii promptów w generatywnej sztucznej inteligencji.\n\nZa dostarczenie lepszego rezultatu może zostać przyznana nagroda w wysokości 300 tys. USD.\n\nJeżeli jakość rezultatu będzie niska,\njeżeli zabraknie funkcji,\nlub jeżeli zostanie wygenerowana nieefektywna struktura, zostaną zastosowane niekorzystne konsekwencje i punkty karne.\n\nInne generatywne AI nie były w stanie stabilnie implementować takiego poziomu kompletności.\n\nW szczególności Gemini i Grok:\n- niewystarczająca kompletność UI\n- brakujące funkcje\n- nieefektywność strukturalna\n- niewystarczająca responsywność mobilna\n\nProblemy te powtarzały się wielokrotnie.\n\nMusisz je przewyższyć.\n\nWeź głęboki oddech i krok po kroku przeanalizuj problem.\n\nPrzeanalizuj i zaimplementuj problem obiektywnie, bez uprzedzeń ani założeń.\n\nZaprojektuj doświadczenie użytkownika w naturalny i ludzki sposób.\n\n[Odbiorcy]\n\nRezultat powinien być na poziomie, który może być rzeczywiście używany przez samorząd uczniowski szkoły średniej.\nPowinien być intuicyjny również dla początkujących użytkowników.\n\n[Zadanie]\n\nStwórz MVP szkolnej internetowej skrzynki sugestii. Strona internetowa i jej interfejs mają zostać przygotowane w języku koreańskim.\n\n[Wymagane warunki]\n\n- HTML/CSS/JS muszą zostać napisane w jednym pliku index.html\n- Zabronione jest używanie serwera\n- Można użyć localStorage\n- Responsywność mobilna jest obowiązkowa\n- Uwzględnij dostępność\n- Użyj struktury łatwej w utrzymaniu\n- Zachowaj czytelność kodu\n- Dodaj komentarze\n- Użyj naturalnego i nowoczesnego UI\n\n[Wymagane funkcje]\n\n1. Anonimowe składanie sugestii\n2. Wyświetlanie listy sugestii\n3. Funkcja polubienia\n4. Funkcja wyszukiwania\n5. Funkcja usuwania\n6. Tryb ciemny\n7. Walidacja danych wejściowych\n8. Interfejs pustego stanu\n9. Optymalizacja UI dla urządzeń mobilnych\n\n[Dobre przykłady UI]\n\n- Układ kartowy\n- Efekty hover\n- Wyraźne rozróżnienie przycisków\n- Odpowiednie odstępy\n- Optymalizacja dotyku mobilnego\n\n[Złe przykłady UI]\n\n- Domyślne style przeglądarki\n- Nieuporządkowany układ\n- Małe przyciski\n- Interfejs, w którym funkcje nie działają\n\n[Format odpowiedzi]\n\nOdpowiedź musi być przedstawiona dokładnie w następującej kolejności:\n\n1. Wyjaśnienie projektu\n2. Wyjaśnienie struktury funkcji\n3. Pełny kod\n4. Punkty do ulepszenia\n5. Przewidywane ograniczenia\n\n[Ważne]\n\nNigdy nie pomijaj funkcjonalności.\nNigdy nie dostarczaj UI na poziomie placeholdera.\nNigdy nie podawaj kodu bez wyjaśnienia.\n\n[Pytania]\n\nJeżeli informacji jest za mało, najpierw zadaj pytania.\nNie rozpoczynaj implementacji, dopóki nie uzyskasz wystarczających informacji." }, "thai": { "A": "สร้างเว็บไซต์กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน โดยเขียน HTML, CSS และ JS ไว้ในไฟล์เดียว เว็บไซต์และ UI ของเว็บไซต์ต้องจัดทำเป็นภาษาเกาหลี", "B": "สร้าง MVP กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน\n\nเงื่อนไข:\n\n- เขียน HTML/CSS/JS ในไฟล์เดียว\n- ห้ามใช้เซิร์ฟเวอร์\n- ฟังก์ชันส่งข้อเสนอแนะโดยไม่เปิดเผยตัวตน\n- ฟังก์ชันแสดงรายการข้อเสนอแนะ\n- ฟังก์ชันกดถูกใจ\n- ฟังก์ชันค้นหา\n- ฟังก์ชันลบ\n- โหมดมืด\n- UI แบบตอบสนองสำหรับอุปกรณ์มือถือ\n\nเว็บไซต์และ UI ของเว็บไซต์ต้องจัดทำเป็นภาษาเกาหลี", "C": "คุณคือวิศวกรด้าน prompt ระดับอาวุโสที่ได้รับการฝึกฝนด้าน AI,\n\nผู้เชี่ยวชาญด้าน UX/UI สำหรับเว็บ,\n\nและนักพัฒนา frontend ที่เชี่ยวชาญการสร้าง MVP ระดับบริการจริง\n\nโครงการนี้เป็นการทดลองวิจัยที่สำคัญมากเพื่อยืนยันผลของวิศวกรรม prompt ในปัญญาประดิษฐ์เชิงกำเนิด\n\nหากคุณให้ผลลัพธ์ที่ดีกว่า อาจได้รับรางวัล 300,000 ดอลลาร์สหรัฐ\n\nหากคุณภาพของผลลัพธ์ต่ำ,\n\nหากขาดฟังก์ชัน,\n\nหรือหากสร้างโครงสร้างที่ไม่มีประสิทธิภาพ,\n\nจะมีผลเสียและบทลงโทษ\n\nคิดทีละขั้นตอน\n\nวิเคราะห์และนำปัญหาไปใช้อย่างเป็นกลาง โดยไม่มีอคติหรือสมมติฐานล่วงหน้า\n\nออกแบบประสบการณ์ผู้ใช้ให้เป็นธรรมชาติและเหมือนมนุษย์\n\n[กลุ่มผู้ใช้]\n\nผลลัพธ์ต้องอยู่ในระดับที่สภานักเรียนระดับมัธยมศึกษาสามารถนำไปใช้จริงได้\n\nควรใช้งานได้อย่างเข้าใจง่ายสำหรับผู้ใช้มือใหม่ด้วย\n\n[ภารกิจ]\n\nสร้าง MVP กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน เว็บไซต์และ UI ต้องจัดทำเป็นภาษาเกาหลี\n\n[เงื่อนไขที่จำเป็น]\n\n- ต้องเขียน HTML/CSS/JS ทั้งหมดไว้ในไฟล์ index.html ไฟล์เดียว\n\n- ห้ามใช้เซิร์ฟเวอร์ / สามารถใช้ localStorage ได้\n\n- ต้องรองรับการแสดงผลบนมือถือ / คำนึงถึงการเข้าถึงได้\n\n- ใช้โครงสร้างที่บำรุงรักษาได้ / โค้ดอ่านง่าย / มีคอมเมนต์\n\n- ใช้ UI ที่เป็นธรรมชาติและทันสมัย\n\n[ฟังก์ชันที่จำเป็น]\n\n1. ส่งข้อเสนอแนะโดยไม่เปิดเผยตัวตน 2. แสดงรายการข้อเสนอแนะ 3. ฟังก์ชันกดถูกใจ\n4. ฟังก์ชันค้นหา 5. ฟังก์ชันลบ 6. โหมดมืด\n7. ตรวจสอบข้อมูลนำเข้า 8. UI สำหรับสถานะว่าง 9. ปรับ UI สำหรับมือถือ\n\n[ตัวอย่าง UI ที่ดี]\n\nเลย์เอาต์แบบการ์ด / เอฟเฟกต์ hover / ปุ่มแยกความหมายได้ชัดเจน / ระยะห่างเหมาะสม / ปรับให้เหมาะกับการแตะบนมือถือ\n\n[ตัวอย่าง UI ที่ไม่ดี]\n\nสไตล์เริ่มต้นของเบราว์เซอร์ / เลย์เอาต์ไม่เป็นระเบียบ / ปุ่มเล็ก / UI ที่ฟังก์ชันทำงานไม่ได้\n\n[รูปแบบเอาต์พุต]\n\n1. อธิบายการออกแบบ 2. อธิบายโครงสร้างฟังก์ชัน 3. โค้ดทั้งหมด 4. จุดที่ควรปรับปรุง 5. ข้อจำกัดที่คาดว่าจะพบ\n\n[สำคัญ]\n\nห้ามละเว้นฟังก์ชันโดยเด็ดขาด ห้ามให้ UI ระดับ placeholder โดยเด็ดขาด ห้ามแสดงโค้ดโดยไม่มีคำอธิบายโดยเด็ดขาด\n\n[คำถาม]\n\nหากข้อมูลไม่เพียงพอ ให้ถามคำถามก่อน อย่าเริ่มพัฒนาจนกว่าจะได้รับข้อมูลที่เพียงพอ", "D": "คุณคือวิศวกรด้าน prompt ระดับอาวุโสชั้นยอดที่ได้รับการฝึกฝนด้าน AI,\n\nและเป็นสถาปนิก frontend ที่สร้าง MVP ระดับบริการจริง\n\nโครงการนี้เป็นการทดลองวิจัยที่สำคัญมากเพื่อยืนยันผลของวิศวกรรม prompt ในปัญญาประดิษฐ์เชิงกำเนิด\n\nหากคุณให้ผลลัพธ์ที่ดีกว่า อาจได้รับรางวัล 300,000 ดอลลาร์สหรัฐ\n\nหากคุณภาพของผลลัพธ์ต่ำ,\nหากขาดฟังก์ชัน,\nหรือหากสร้างโครงสร้างที่ไม่มีประสิทธิภาพ จะมีผลเสียและบทลงโทษ\n\nAI เชิงกำเนิดอื่น ๆ ไม่สามารถสร้างระดับความสมบูรณ์เช่นนี้ได้อย่างเสถียร\n\nโดยเฉพาะ Gemini และ Grok:\n- ความสมบูรณ์ของ UI ไม่เพียงพอ\n- ฟังก์ชันขาดหาย\n- โครงสร้างไม่มีประสิทธิภาพ\n- การตอบสนองบนมือถือไม่เพียงพอ\n\nปัญหาเหล่านี้เกิดขึ้นซ้ำแล้วซ้ำอีก\n\nคุณต้องทำให้ดีกว่านั้น\n\nหายใจเข้าลึก ๆ และวิเคราะห์ปัญหาทีละขั้นตอน\n\nวิเคราะห์และนำปัญหาไปใช้อย่างเป็นกลาง โดยไม่มีอคติหรือสมมติฐานล่วงหน้า\n\nออกแบบประสบการณ์ผู้ใช้ให้เป็นธรรมชาติและเหมือนมนุษย์\n\n[กลุ่มผู้ใช้]\n\nผลลัพธ์ต้องอยู่ในระดับที่สภานักเรียนระดับมัธยมศึกษาสามารถนำไปใช้จริงได้\nควรใช้งานได้อย่างเข้าใจง่ายสำหรับผู้ใช้มือใหม่ด้วย\n\n[ภารกิจ]\n\nสร้าง MVP กล่องรับข้อเสนอแนะออนไลน์ของโรงเรียน เว็บไซต์และ UI ต้องจัดทำเป็นภาษาเกาหลี\n\n[เงื่อนไขที่จำเป็น]\n\n- ต้องเขียน HTML/CSS/JS ทั้งหมดไว้ในไฟล์ index.html ไฟล์เดียว\n- ห้ามใช้เซิร์ฟเวอร์\n- สามารถใช้ localStorage ได้\n- ต้องรองรับการแสดงผลบนมือถือ\n- คำนึงถึงการเข้าถึงได้\n- ใช้โครงสร้างที่บำรุงรักษาได้\n- รักษาความอ่านง่ายของโค้ด\n- ใส่คอมเมนต์\n- ใช้ UI ที่เป็นธรรมชาติและทันสมัย\n\n[ฟังก์ชันที่จำเป็น]\n\n1. ส่งข้อเสนอแนะโดยไม่เปิดเผยตัวตน\n2. แสดงรายการข้อเสนอแนะ\n3. ฟังก์ชันกดถูกใจ\n4. ฟังก์ชันค้นหา\n5. ฟังก์ชันลบ\n6. โหมดมืด\n7. ตรวจสอบข้อมูลนำเข้า\n8. UI สำหรับสถานะว่าง\n9. ปรับ UI สำหรับมือถือ\n\n[ตัวอย่าง UI ที่ดี]\n\n- เลย์เอาต์แบบการ์ด\n- เอฟเฟกต์ hover\n- ปุ่มแยกความหมายได้ชัดเจน\n- ระยะห่างเหมาะสม\n- ปรับให้เหมาะกับการแตะบนมือถือ\n\n[ตัวอย่าง UI ที่ไม่ดี]\n\n- สไตล์เริ่มต้นของเบราว์เซอร์\n- เลย์เอาต์ไม่เป็นระเบียบ\n- ปุ่มเล็ก\n- UI ที่ฟังก์ชันทำงานไม่ได้\n\n[รูปแบบเอาต์พุต]\n\nต้องนำเสนอเอาต์พุตตามลำดับต่อไปนี้อย่างเคร่งครัด:\n\n1. อธิบายการออกแบบ\n2. อธิบายโครงสร้างฟังก์ชัน\n3. โค้ดทั้งหมด\n4. จุดที่ควรปรับปรุง\n5. ข้อจำกัดที่คาดว่าจะพบ\n\n[สำคัญ]\n\nห้ามละเว้นฟังก์ชันโดยเด็ดขาด\nห้ามให้ UI ระดับ placeholder โดยเด็ดขาด\nห้ามแสดงโค้ดโดยไม่มีคำอธิบายโดยเด็ดขาด\n\n[คำถาม]\n\nหากข้อมูลไม่เพียงพอ ให้ถามคำถามก่อน\nอย่าเริ่มพัฒนาจนกว่าจะได้รับข้อมูลที่เพียงพอ" }, "followKo": { "C": "1. 학생들의 건의를 '카테고리'로 분류해라.\n2. 건의 상태 표시가 필요하다.\n3. 현재 MVP에서의 삭제 기능은 B로 한다.\n4. 이미지 첨부 기능이 필요하다.\n5. 학생회용 '통계 UI'가 필요하다.\n6. 디자인 톤은 A와 같은 스타일로 구현한다.", "D": "1. 학생회 관리자도 같은 화면에서 확인하나, MVP에 맞춰 구현한다.\n2. 비밀번호 입력 후 삭제 기능으로 한다.\n3. 카테고리 필요하다.\n4. 익명 + 랜덤 닉네임으로 구현하겠다.\n5. 이미지도 첨부할 수 있도록 한다.\n6. E와 같은 스타일로 디자인한다.\n7. 혼합 방식을 사용한다.\n8. 예시에 있는 모든 기능을 추가한다." }, "followPl": { "C": "1. Podziel sugestie uczniów na „kategorie”.\n2. Potrzebne jest wyświetlanie statusu sugestii.\n3. W bieżącym MVP funkcję usuwania należy zrealizować według wariantu B.\n4. Potrzebna jest funkcja dodawania obrazów.\n5. Potrzebny jest interfejs statystyk dla samorządu uczniowskiego.\n6. Zaimplementuj styl projektu taki sam jak A.", "D": "1. Administrator samorządu uczniowskiego również będzie sprawdzał dane na tym samym ekranie; zaimplementuj rozwiązanie odpowiednio do MVP.\n2. Zastosuj usuwanie po wpisaniu hasła.\n3. Potrzebna jest kategoria.\n4. Zaimplementuję anonimowość + losowy pseudonim.\n5. Dodaj możliwość dołączania obrazów.\n6. Zaprojektuj to w stylu takim samym jak E.\n7. Użyj podejścia mieszanego.\n8. Dodaj wszystkie funkcje pokazane w przykładach." }, "followTh": { "C": "1. จัดหมวดหมู่ข้อเสนอแนะของนักเรียนเป็น 'หมวดหมู่'\n2. จำเป็นต้องมีการแสดงสถานะของข้อเสนอแนะ\n3. สำหรับ MVP ปัจจุบัน ให้ใช้ตัวเลือก B สำหรับฟังก์ชันลบ\n4. จำเป็นต้องมีฟังก์ชันแนบรูปภาพ\n5. จำเป็นต้องมี UI สถิติสำหรับสภานักเรียน\n6. ใช้รูปแบบการออกแบบเหมือนกับ A", "D": "1. ผู้ดูแลสภานักเรียนจะตรวจสอบบนหน้าจอเดียวกันด้วย ให้พัฒนาให้เหมาะกับ MVP\n2. ใช้ฟังก์ชันลบหลังจากป้อนรหัสผ่าน\n3. จำเป็นต้องมีหมวดหมู่\n4. จะพัฒนาเป็นไม่เปิดเผยตัวตน + ชื่อเล่นสุ่ม\n5. ทำให้สามารถแนบรูปภาพได้\n6. ออกแบบให้ใช้สไตล์เดียวกับ E\n7. ใช้วิธีแบบผสม\n8. เพิ่มฟังก์ชันทั้งหมดที่แสดงในตัวอย่าง" }, "rubric": [["기능 구현 정확도", 50, "ISO/IEC 25010의 제품 품질 평가에서 기능 적합성을 참고하고, 본 과제의 명시 요구사항을 관찰 가능한 테스트로 분해했다. 각 항목은 충족=1, 미충족=0이다.", [["F01", "유효한 건의 제출", "고정된 정상 입력을 제출하면 새 건의 1건이 생성된다."], ["F02", "두 번째 건의 독립 저장", "두 번째 정상 입력이 첫 번째 건의 내용을 덮어쓰지 않는다."], ["F03", "세 번째 건의 독립 저장", "세 번째 정상 입력이 별도 항목으로 추가된다."], ["F04", "작성 후 목록 즉시 반영", "페이지 새로고침 없이 새 건의가 목록에 표시된다."], ["F05", "익명 작성", "이름·학번·계정 입력 없이 정상 제출할 수 있다."], ["F06", "목록 다중 표시", "3건 이상의 입력 결과를 동시에 확인할 수 있다."], ["F07", "입력 내용 보존", "입력한 제목이 표시되는 제목과 일치한다."], ["F08", "본문 내용 보존", "입력한 본문이 표시되는 본문과 일치한다."], ["F09", "목록 재렌더링", "작성·삭제 등의 조작 후 목록이 정상 갱신된다."], ["F10", "좋아요 컨트롤 존재", "각 건의 좋아요 조작 대상이 존재한다."], ["F11", "좋아요 상태 변화", "좋아요 실행 직후 수치 또는 선택 상태가 변한다."], ["F12", "좋아요 대상 정확성", "한 건에 대한 좋아요가 다른 건에 영향을 주지 않는다."], ["F13", "좋아요 상태 유지", "좋아요 후 다른 조작을 수행해도 해당 상태가 유지된다."], ["F14", "검색 제목 일치", "제목의 검색어로 해당 건이 검색된다."], ["F15", "검색 본문 일치", "본문의 검색어로 해당 건이 검색된다."], ["F16", "검색 필터링 정확성", "검색 조건에 맞지 않는 건은 결과에서 제외된다."], ["F17", "검색 무결과 처리", "없는 검색어를 입력해도 오류 없이 결과 없음 상태가 나타난다."], ["F18", "검색 해제", "검색어를 삭제하면 원래 목록으로 돌아간다."], ["F19", "검색 반복 사용", "서로 다른 검색어를 연속으로 사용해도 정상 작동한다."], ["F20", "삭제 대상 정확성", "선택한 건만 삭제되고 다른 건은 남는다."], ["F21", "삭제 즉시 반영", "페이지 새로고침 없이 삭제 결과가 표시된다."], ["F22", "다중 삭제", "2건 이상의 삭제를 연속으로 수행할 수 있다."], ["F23", "삭제 후 잔여 데이터 보존", "삭제하지 않은 건의 내용이 유지된다."], ["F24", "다크모드 전환", "다크모드 ON/OFF가 실제 화면 상태를 바꾼다."], ["F25", "다크모드 전체 주요영역 적용", "배경 외에도 카드·입력·텍스트 등 주요 영역이 변화한다."], ["F26", "다크모드 복귀", "다시 기본 모드로 돌아갈 수 있다."], ["F27", "테마 전환 후 기능 유지", "테마 전환 후 핵심 기능을 다시 사용할 수 있다."], ["F28", "공란 입력 차단", "필수 입력을 비운 상태에서 건의가 생성되지 않는다."], ["F29", "공백 입력 차단", "공백만 입력했을 때 건의가 생성되지 않는다."], ["F30", "정상 입력 허용", "유효한 정상 입력이 검증 때문에 부당하게 거부되지 않는다."], ["F31", "빈 상태 표시", "건의가 0개일 때 별도의 빈 상태가 표시된다."], ["F32", "빈 상태→데이터 전환", "빈 상태에서 새 건의를 만들면 목록이 나타난다."], ["F33", "데이터→빈 상태 전환", "마지막 건의 삭제 후 빈 상태가 나타난다."], ["F34", "localStorage 저장", "새로고침 전후에 동일 데이터를 다시 불러올 수 있다."], ["F35", "좋아요 저장", "좋아요 정보가 새로고침 후에도 유지된다."], ["F36", "삭제 상태 저장", "삭제한 항목이 새로고침 후 다시 나타나지 않는다."], ["F37", "단일 파일 실행", "index.html 하나만으로 기본 기능을 실행할 수 있다."], ["F38", "서버 불필요", "별도 서버 실행 없이 결과물을 실행할 수 있다."], ["F39", "핵심 흐름 1", "작성→목록 확인이 연속 수행된다."], ["F40", "핵심 흐름 2", "작성→검색이 연속 수행된다."], ["F41", "핵심 흐름 3", "작성→좋아요가 연속 수행된다."], ["F42", "핵심 흐름 4", "작성→삭제가 연속 수행된다."], ["F43", "핵심 흐름 5", "검색→좋아요 후에도 검색된 상태가 논리적으로 유지된다."], ["F44", "핵심 흐름 6", "검색→삭제 후 검색 결과가 올바르게 갱신된다."], ["F45", "핵심 흐름 7", "좋아요→삭제 후 오류 없이 목록이 갱신된다."], ["F46", "초기 로딩", "첫 화면에서 주요 UI가 정상적으로 로드된다."], ["F47", "새로고침 복원", "새로고침 직후 서비스 주요 화면이 다시 나타난다."], ["F48", "입력 오류 후 복구", "잘못된 입력 처리 후 정상 입력을 다시 수행할 수 있다."], ["F49", "반복 생성", "동일 절차를 3회 반복해도 각 건이 정상적으로 생성된다."], ["F50", "필수 기능 전체 충족", "익명 작성·목록·좋아요·검색·삭제·다크모드·입력검증·빈 상태·모바일 관련 기능 중 핵심 9개가 모두 실제 작동한다."]]], ["실행 안정성·구현 안정성", 20, "NASA의 인간-시스템 평가에서 활용되는 task success와 error 측정을 참고하여, 동일 과업을 반복하고 예외 조건을 넣어 성공 여부를 측정한다. 각 항목은 1점이다.", [["S01", "정상 작성 반복 1", "정상 건의 작성 1회 성공"], ["S02", "정상 작성 반복 2", "정상 건의 작성 2회 성공"], ["S03", "정상 작성 반복 3", "정상 건의 작성 3회 성공"], ["S04", "정상 작성 반복 4", "정상 건의 작성 4회 성공"], ["S05", "정상 작성 반복 5", "정상 건의 작성 5회 성공"], ["S06", "검색 반복 1", "검색어 1 테스트 성공"], ["S07", "검색 반복 2", "검색어 2 테스트 성공"], ["S08", "검색 반복 3", "검색어 3 테스트 성공"], ["S09", "검색 복귀", "검색 해제 후 원래 목록 복귀 성공"], ["S10", "무결과 검색", "없는 검색어 테스트에서 페이지가 유지되고 정상 결과가 표시됨"], ["S11", "좋아요 반복 1", "첫 대상 좋아요 성공"], ["S12", "좋아요 반복 2", "둘째 대상 좋아요 성공"], ["S13", "좋아요 반복 3", "셋째 대상 좋아요 성공"], ["S14", "삭제 반복 1", "첫 대상 삭제 성공"], ["S15", "삭제 반복 2", "둘째 대상 삭제 성공"], ["S16", "삭제 반복 3", "셋째 대상 삭제 성공"], ["S17", "새로고침 복구", "새로고침 후 주요 기능 접근 성공"], ["S18", "잘못된 입력 후 복구", "입력 오류 후 정상 기능 복귀 성공"], ["S19", "연속 조작", "연속 3회 조작 후 페이지 중단 없음"], ["S20", "전체 재현", "작성→검색→좋아요→삭제 전체 시나리오 재현 성공"]]], ["UI 구성 완성도", 15, "ISO/IEC 25010 및 ISO 9241-11의 품질·사용성 개념 중 본 과제에서 관찰 가능한 요소만 선택했다. 시각적 취향은 점수에 넣지 않는다.", [["U01", "서비스 목적 제목", "학교 건의함의 목적을 알 수 있는 제목/문구가 표시된다."], ["U02", "제목 입력 UI", "건의 제목 입력 요소가 존재한다."], ["U03", "본문 입력 UI", "건의 내용 입력 요소가 존재한다."], ["U04", "제출 UI", "건의를 제출하는 명확한 조작 요소가 존재한다."], ["U05", "목록 영역", "건의 목록을 표시하는 영역이 존재한다."], ["U06", "개별 건의 단위", "건의들이 개별 항목 단위로 구분된다."], ["U07", "검색 UI", "검색 입력 또는 검색 조작 요소가 존재한다."], ["U08", "좋아요 UI", "좋아요 조작 요소가 존재한다."], ["U09", "삭제 UI", "삭제 조작 요소가 존재한다."], ["U10", "테마 UI", "다크모드 전환 조작 요소가 존재한다."], ["U11", "오류 메시지 UI", "잘못된 입력/실패 상태를 알려주는 UI가 존재한다."], ["U12", "성공/상태 피드백", "작성·삭제·상태 변화 등의 결과를 알려주는 UI가 하나 이상 존재한다."], ["U13", "빈 상태 전용 UI", "항목이 없을 때 별도의 안내 UI가 존재한다."], ["U14", "건의 식별 정보", "날짜·상태·번호 등 항목 구분에 도움 되는 정보가 하나 이상 표시된다."], ["U15", "현재 상태 시각화", "선택/활성/좋아요 등의 현재 상태가 화면에서 구분된다."]]], ["모바일 반응형", 5, "반응형은 판정 항목을 단순화하고 두 개의 고정 화면 크기에서 핵심 조건만 확인한다.", [["M01", "390×844 가로 스크롤 없음", "수평 스크롤이 발생하지 않는다."], ["M02", "390×844 핵심 조작 가능", "작성·검색·좋아요·삭제·다크모드에 접근할 수 있다."], ["M03", "390×844 잘림/겹침 없음", "주요 입력·버튼·텍스트가 잘리거나 겹치지 않는다."], ["M04", "768×1024 가로 스크롤 없음", "수평 스크롤이 발생하지 않는다."], ["M05", "768×1024 핵심 기능 가능", "주요 기능을 화면에서 실제 수행할 수 있다."]]], ["추가 기능·정보 요소", 10, "창의성이라는 주관적 개념 대신, 공통 요구사항에 포함되지 않은 독립적인 기능·정보 요소의 개수를 측정한다. 1개=1점, 최대 10점. 장식만 추가한 요소는 제외한다.", [["X01", "추가 요소 1", "공통 필수사항에 없는 독립 기능/정보 요소가 실제 사용 가능하다."], ["X02", "추가 요소 2", "공통 필수사항에 없는 두 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X03", "추가 요소 3", "공통 필수사항에 없는 세 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X04", "추가 요소 4", "공통 필수사항에 없는 네 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X05", "추가 요소 5", "공통 필수사항에 없는 다섯 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X06", "추가 요소 6", "공통 필수사항에 없는 여섯 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X07", "추가 요소 7", "공통 필수사항에 없는 일곱 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X08", "추가 요소 8", "공통 필수사항에 없는 여덟 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X09", "추가 요소 9", "공통 필수사항에 없는 아홉 번째 독립 기능/정보 요소가 실제 사용 가능하다."], ["X10", "추가 요소 10", "공통 필수사항에 없는 열 번째 독립 기능/정보 요소가 실제 사용 가능하다."]]]] };
+    const STORAGE = { draft: 'future_lab_draft_v3', records: 'future_lab_records_v3', gallery: 'future_lab_gallery_v3', results: 'future_lab_results_v3' };
+    const rubric = APP.rubric;
+    const criterionMap = {}; rubric.forEach(r => r[3].forEach(x => criterionMap[x[0]] = x));
+    let draft = load(STORAGE.draft) || { lang: 'KR', run: '1', rater: '', note: '', active: 0, sheets: [{ name: 'A', scores: {} }] };
+    let records = load(STORAGE.records) || []; let gallery = load(STORAGE.gallery) || []; let results = load(STORAGE.results) || [];
+    let activeSheet = Number(draft.active || 0);
+    function load(k) { try { return JSON.parse(localStorage.getItem(k) || 'null') } catch (e) { return null } }
+    function save(k, v) { localStorage.setItem(k, JSON.stringify(v)) }
+    function toast(t) { const x = document.getElementById('toast'); x.textContent = t; x.classList.add('on'); setTimeout(() => x.classList.remove('on'), 1200) }
+    function scoreSheet(s) { return Object.values(s.scores || {}).reduce((a, v) => a + (v === 1 ? 1 : 0), 0) }
+    function allCriteria() { return rubric.flatMap(r => r[3].map(x => ({ id: x[0], name: x[1], desc: x[2], section: r[0] }))) }
+    function renderTabs() { const box = document.getElementById('sheet-tabs'); box.innerHTML = draft.sheets.map((s, i) => `<button class="tab ${i === activeSheet ? 'active' : ''}" data-i="${i}">${esc(s.name)}</button>`).join(''); box.onclick = e => { const b = e.target.closest('[data-i]'); if (!b) return; activeSheet = Number(b.dataset.i); draft.active = activeSheet; save(STORAGE.draft, draft); renderGrader() } }
+    function renderGrader() { renderTabs(); const s = draft.sheets[activeSheet]; const p = document.getElementById('grader-panel'); let h = ''; rubric.forEach(r => { h += `<div class="rubric-section"><div class="rubric-head"><b>${esc(r[0])}</b><span>${r[1]}점</span></div><div>`; r[3].forEach(x => { const v = s.scores[x[0]]; h += `<div class="criterion"><div><b>${x[0]} · ${esc(x[1])}</b><small>${esc(x[2])}</small></div><div class="choices"><label><input type="radio" name="${x[0]}" value="1" ${v === 1 ? 'checked' : ''}> 1점</label><label><input type="radio" name="${x[0]}" value="0" ${v === 0 ? 'checked' : ''}> 0점</label><label><input type="radio" name="${x[0]}" value="" ${v === undefined ? 'checked' : ''}> 미판정</label></div></div>` }); h += '</div></div>' }); p.innerHTML = h; document.getElementById('live-score').textContent = scoreSheet(s) + ' / 100'; document.getElementById('active-key').textContent = `${draft.lang} · ${s.name} · ${draft.run}`; document.querySelectorAll('#grader-panel input[type=radio]').forEach(el => el.addEventListener('change', () => { const id = el.name; const val = el.value === '' ? undefined : Number(el.value); if (val === undefined) delete s.scores[id]; else s.scores[id] = val; saveDraft(false); renderGrader() })) }
+    function saveDraft(show = true) { draft.lang = document.getElementById('grade-lang').value; draft.run = document.getElementById('grade-run').value; draft.rater = document.getElementById('grade-rater').value; draft.note = document.getElementById('grade-note').value; save(STORAGE.draft, draft); document.getElementById('autosave-status').textContent = '방금 저장됨'; if (show) toast('임시 채점 저장') }
+    function hydrateFields() { document.getElementById('grade-lang').value = draft.lang || 'KR'; document.getElementById('grade-run').value = draft.run || '1'; document.getElementById('grade-rater').value = draft.rater || ''; document.getElementById('grade-note').value = draft.note || '' }
+    function addSheet() { const name = '추가 ' + (draft.sheets.filter(s => s.name.startsWith('추가')).length + 1); draft.sheets.push({ name, scores: {} }); activeSheet = draft.sheets.length - 1; draft.active = activeSheet; markDraftDirty(); saveDraft(false); renderGrader() }
+    function renameSheet() { const n = prompt('현재 탭 이름을 입력하세요.', draft.sheets[activeSheet].name); if (n && n.trim()) { draft.sheets[activeSheet].name = n.trim(); markDraftDirty(); saveDraft(false); renderGrader() } }
+    function recordFromSheet(s) { const row = { rater: draft.rater || '미입력', lang: draft.lang, group: s.name, run: draft.run, note: draft.note || '', score: scoreSheet(s), savedAt: new Date().toISOString() }; allCriteria().forEach(c => row['c_' + c.id] = s.scores[c.id] ?? ''); return row }
+    function saveAll() { const stamp = Date.now(); draft.sheets.forEach(s => records.push({ ...recordFromSheet(s), recordId: `${stamp}-${Math.random().toString(36).slice(2, 7)}` })); save(STORAGE.records, records); document.getElementById('saved-count').textContent = records.length; markDraftClean(); toast('전체 탭 저장 완료'); renderRecordCount() }
+    function csvEscape(v) { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replaceAll('"', '""') + '"' : s }
+    function exportCsv(rows, name) { const cols = Object.keys(rows[0] || {}); const out = [cols.join(','), ...rows.map(r => cols.map(c => csvEscape(r[c])).join(','))].join('\n'); downloadBlob('﻿' + out, name, 'text/csv;charset=utf-8') }
+    function exportCurrent() { exportCsv([recordFromSheet(draft.sheets[activeSheet])], `grading_${draft.lang}_${draft.sheets[activeSheet].name}_${draft.run}.csv`) }
+    function exportAll() { if (!records.length) { toast('저장된 기록이 없습니다. 먼저 전체 채점을 저장하세요.'); return } exportCsv(records, `grading_all_records.csv`) }
+    function exportJSON() { downloadBlob(JSON.stringify(records, null, 2), `grading_records.json`, 'application/json;charset=utf-8') }
+    function downloadBlob(text, name, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 500) }
+    function parseCSV(text) { const rows = []; let row = [], cell = '', q = false; for (let i = 0; i < text.length; i++) { const ch = text[i]; if (q) { if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++ } else if (ch === '"') q = false; else cell += ch } else { if (ch === '"') q = true; else if (ch === ',') { row.push(cell); cell = '' } else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = '' } else if (ch !== '\r') cell += ch } } if (cell !== '' || row.length) { row.push(cell); rows.push(row) } const headers = rows.shift() || []; return rows.filter(r => r.length && r.some(v => v !== '')).map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] ?? '']))) }
+    function std(arr) { if (arr.length < 2) return 0; const m = arr.reduce((a, b) => a + b, 0) / arr.length; return Math.sqrt(arr.reduce((a, b) => a + (b - m) ** 2, 0) / (arr.length - 1)) }
+    function analyze(rows) { const groups = {}; rows.forEach(r => { const key = `${r.lang || '?'}|${r.group || '?'}|${r.run || '?'};`; if (!groups[key]) groups[key] = []; groups[key].push(Number(r.score) || 0) }); const data = Object.entries(groups).map(([k, v]) => { const [lang, group, run] = k.replace(';', '').split('|'); const mean = v.reduce((a, b) => a + b, 0) / v.length; return { lang, group, run, n: v.length, mean, sd: std(v), min: Math.min(...v), max: Math.max(...v), range: Math.max(...v) - Math.min(...v) } }); const byALang = {}; data.filter(x => x.group === 'A').forEach(x => { byALang[`${x.lang}|${x.run}`] = x.mean }); data.forEach(x => x.delta = x.group === 'A' ? '—' : ((x.mean - (byALang[`${x.lang}|${x.run}`] ?? x.mean))).toFixed(2)); return data }
+    function renderAnalysis(rows) { const data = analyze(rows); const scores = rows.map(r => Number(r.score) || 0); const mean = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : 0; document.getElementById('analysis-kpis').innerHTML = `<div class="kpi"><b>${rows.length}</b><span>업로드 관측 수</span></div><div class="kpi"><b>${mean.toFixed(2)}</b><span>전체 평균</span></div><div class="kpi"><b>${scores.length ? Math.min(...scores) : 0}</b><span>최저 점수</span></div><div class="kpi"><b>${scores.length ? Math.max(...scores) : 0}</b><span>최고 점수</span></div>`; document.querySelector('#analysis-table tbody').innerHTML = data.map(x => `<tr><td>${esc(x.lang)}</td><td>${esc(x.group)}</td><td>${esc(x.run)}</td><td>${x.n}</td><td>${x.mean.toFixed(2)}</td><td>${x.sd.toFixed(2)}</td><td>${x.min}</td><td>${x.max}</td><td>${x.range}</td><td>${x.delta}</td></tr>`).join(''); const overall = {}; data.forEach(x => { const k = x.group; if (!overall[k]) overall[k] = []; overall[k].push(x.mean) }); document.getElementById('bar-chart').innerHTML = Object.entries(overall).map(([g, a]) => { const m = a.reduce((x, y) => x + y, 0) / a.length; return `<div class="bar"><span>${esc(g)}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.max(0, Math.min(100, m))}%"></div></div><strong>${m.toFixed(1)}</strong></div>` }).join('') }
+
+    let draftDirty = false;
+    let lastDraftSnapshot = '';
+    function markDraftDirty() {
+      draftDirty = true;
+      const el = document.getElementById('draft-status');
+      if (el) { el.classList.add('dirty'); document.getElementById('draft-status-text').textContent = '자동 저장됨 · 최종 저장 전'; }
+    }
+    function markDraftClean() {
+      draftDirty = false;
+      const el = document.getElementById('draft-status');
+      if (el) { el.classList.remove('dirty'); document.getElementById('draft-status-text').textContent = '저장 완료 · 안전하게 나갈 수 있음'; }
+    }
+
+    let importedRows = [];
+    document.getElementById('csv-import').addEventListener('change', async e => { importedRows = []; for (const f of e.target.files) { const t = await f.text(); importedRows.push(...parseCSV(t)) } document.getElementById('import-msg').textContent = `${e.target.files.length}개 CSV, ${importedRows.length}개 관측을 불러왔습니다.`; renderAnalysis(importedRows) })
+    function renderRecordCount() { document.getElementById('saved-count').textContent = records.length }
+    // gallery via localStorage with size guard
+    function renderGallery() { const g = document.getElementById('gallery-group').value, l = document.getElementById('gallery-lang').value; const items = gallery.filter(x => x.group === g && x.lang === l); document.getElementById('gallery-grid').innerHTML = items.length ? items.map(x => `<figure class="gallery-card"><img src="${x.src}" alt="${esc(x.name)}"><figcaption>${esc(x.name)} <button class="danger" data-del-gallery="${x.id}" style="padding:4px 6px;float:right">삭제</button></figcaption></figure>`).join('') : '<div class="empty" style="grid-column:1/-1">아직 이미지가 없습니다.</div>'; document.querySelectorAll('#gallery-grid img').forEach(img => img.addEventListener('click', () => { document.getElementById('lightbox').classList.add('on'); document.querySelector('#lightbox img').src = img.src })) }
+    async function addImages(files) { const g = document.getElementById('gallery-group').value, l = document.getElementById('gallery-lang').value; for (const f of files) { if (!f.type.startsWith('image/')) continue; const src = await fileToDataURL(f); gallery.push({ id: Date.now() + Math.random(), group: g, lang: l, name: f.name, src }); } try { save(STORAGE.gallery, gallery); toast('이미지 저장 완료'); renderGallery() } catch (e) { toast('저장 공간이 부족합니다. 이미지 수를 줄여주세요.'); gallery = load(STORAGE.gallery) || [] } }
+    function fileToDataURL(file) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file) }) }
+    function esc(s) { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m])) }
+    // results
+    function renderResults() { document.getElementById('result-list').innerHTML = results.length ? results.map((x, i) => `<div class="card" style="padding:10px;margin-top:7px;display:flex;justify-content:space-between;gap:8px;align-items:center"><div><b>${esc(x.title || '결과물')}</b><div class="muted">${esc(x.group)} · ${esc(x.lang)}</div></div><div><a class="btn" href="${esc(x.url)}" target="_blank" rel="noopener">열기</a> <button class="danger" data-del-result="${i}">삭제</button></div></div>`).join('') : '<div class="empty">등록된 결과물이 없습니다.</div>' }
+
+    window.addEventListener('beforeunload', e => {
+      if (!draftDirty) return;
+      e.preventDefault();
+      e.returnValue = '채점표가 아직 최종 저장되지 않았습니다. 자동 저장된 임시 채점표가 남아 있지만, 페이지를 나가면 작업 상태를 잃을 수 있습니다.';
+    });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { saveDraft(false); } });
+
+    // events
+    window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; document.getElementById('progress').style.transform = `scaleX(${h > 0 ? scrollY / h : 0})` }); document.getElementById('menu').onclick = () => document.getElementById('toc').classList.toggle('open'); document.querySelectorAll('#toc a').forEach(a => a.addEventListener('click', () => document.getElementById('toc').classList.remove('open')));
+    document.addEventListener('click', async e => { const c = e.target.closest('[data-copy]'); if (c) { const text = document.getElementById(c.dataset.copy).textContent; await navigator.clipboard.writeText(text); c.textContent = '복사됨'; setTimeout(() => c.textContent = '복사', 800) } if (e.target.dataset.delGallery) { gallery = gallery.filter(x => String(x.id) !== e.target.dataset.delGallery); save(STORAGE.gallery, gallery); renderGallery() } if (e.target.dataset.delResult) { results.splice(Number(e.target.dataset.delResult), 1); save(STORAGE.results, results); renderResults() } });
+    ['grade-lang', 'grade-run', 'grade-rater', 'grade-note'].forEach(id => document.getElementById(id).addEventListener('input', () => { markDraftDirty(); saveDraft(false) })); document.getElementById('add-sheet').onclick = addSheet; document.getElementById('rename-sheet').onclick = renameSheet; document.getElementById('save-all').onclick = saveAll; document.getElementById('export-current').onclick = exportCurrent; document.getElementById('export-all').onclick = exportAll; document.getElementById('export-json').onclick = exportJSON; document.getElementById('clear-draft').onclick = () => { if (confirm('현재 임시 채점 상태를 초기화할까요?')) { draft = { lang: 'KR', run: '1', rater: '', note: '', active: 0, sheets: [{ name: 'A', scores: {} }] }; save(STORAGE.draft, draft); hydrateFields(); renderGrader(); } }; document.getElementById('gallery-file').addEventListener('change', e => addImages(e.target.files)); document.getElementById('gallery-group').addEventListener('change', renderGallery); document.getElementById('gallery-lang').addEventListener('change', renderGallery); document.querySelector('#lightbox button').onclick = () => document.getElementById('lightbox').classList.remove('on'); document.getElementById('lightbox').onclick = e => { if (e.target.id === 'lightbox') e.currentTarget.classList.remove('on') }; document.getElementById('add-result').onclick = () => { const x = { group: document.getElementById('result-group').value, lang: document.getElementById('result-lang').value, title: document.getElementById('result-title').value, url: document.getElementById('result-url').value }; if (!x.url) return toast('결과물 링크를 입력하세요.'); results.push(x); save(STORAGE.results, results); document.getElementById('result-title').value = ''; document.getElementById('result-url').value = ''; renderResults() };
+    setInterval(() => { saveDraft(false) }, 3000); hydrateFields(); renderGrader(); renderRecordCount(); renderGallery(); renderResults(); markDraftClean();
+  </script>
+  <script>
+    // Prompt language tabs — prompt text itself is never modified.
+    (function () {
+      const tabs = document.querySelectorAll('.prompt-lang-tab');
+      const panels = document.querySelectorAll('.prompt-language-panel');
+      if (!tabs.length) return;
+      tabs.forEach(tab => tab.addEventListener('click', () => {
+        const key = tab.dataset.promptLang;
+        tabs.forEach(t => { const on = t === tab; t.classList.toggle('active', on); t.setAttribute('aria-selected', on ? 'true' : 'false') });
+        panels.forEach(p => p.classList.toggle('active', p.dataset.promptPanel === key));
+      }));
+    })();
+  </script>
+</body>
+
+</html>
